@@ -1,0 +1,105 @@
+﻿* {
+	font-family: "楷体";
+	margin:0px;
+	padding:0px
+}
+
+img {
+	width: 70px;
+	height: 52px;
+	float:left;
+	margin-left:3px
+}
+
+.top {
+	display: block;
+	text-align:center;
+	width: 750px;
+	font-size: 36px;
+	height: 70px;
+	line-height: 70px
+}
+
+.table {
+	border: 3px #000000 solid;
+	width: 800px;
+	height: 1100px;
+	font-size: 15px;
+	font-weight:700;
+	color:#000
+
+}
+
+input {
+
+	font-weight:700;
+	color:#000;
+	font-family: "楷体";
+font-size:18px;
+}
+
+
+table tr td {
+	border: 1px #000000 solid;
+	width: 300px;
+	height: 28px;
+	line-height: 20px
+
+}
+
+.text {
+	width: 700px;
+	height: 100px;
+	background: none;
+	outline: none;
+	border: 0px;
+	overflow-y: hidden;
+	overflow-x: hidden;
+	resize: none
+	 font-size:18px;
+}
+
+.text_8 {
+	width: 790px;
+	height: 160px;
+	background: none;
+	outline: none;
+	border: 0px;
+	overflow-y: hidden;
+	overflow-x: hidden;
+	resize: none
+	font-size:18px;
+}
+
+textarea {
+	width: 790px;
+	height: 240px;
+	background: none;
+	outline: none;
+	border: 0px;
+	overflow-y: hidden;
+	overflow-x: hidden;
+	resize: none;
+        font-weight: bold;
+        font-size:18px;
+}
+
+.radio {
+ 	width: 18px;
+	height: 18px;
+}
+.checkbox {
+ 	width: 18px;
+	height: 18px;
+}
+
+#td {
+	width: 265px;
+	height: 20px;
+	line-height: 20px;
+	 font-size:18px;
+}
+
+#hr {
+	height: 2px;
+}

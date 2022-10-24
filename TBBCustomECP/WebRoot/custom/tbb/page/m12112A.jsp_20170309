@@ -1,0 +1,153 @@
+﻿<%@include file="/quicksilver/page/include/Initialize.jsp"%>
+<%@ page contentType="text/html;charset=utf-8" pageEncoding="UTF-8"%>
+<c:html>
+	<c:head>
+    	<title>臺灣中小企業銀行轉介客戶抱怨單</title>
+		<link href="custom/tbb/page/css/tbb.css" rel="stylesheet" type="text/css" />
+	</c:head>
+	<c:body>
+		<div align="center" id="tbb">
+			<table class="table">
+				<tr>
+					<td colspan="4" valign="top">
+						<div style="border-bottom:#000000 1px solid;height:70px">
+						
+							<span><img src="custom/tbb/image/logo.jpg" alt=""/></span>
+							<span class="top">臺灣中小企業銀行轉介客戶抱怨單</span>
+						</div>
+					</td>
+				</tr>
+				
+				
+				
+				<tr>
+					<td colspan="4" valign="top">
+					<div>
+							<table  style="font-size:18px;">
+								<tr>
+								<td colspan="4">聯絡人姓名：<input type="text"  size="8" id="Name" onclick="return false"/>
+									身份證字號/統編：<input type="text"  size="10" id="IdCard" onclick="return false"/>					
+									日期-時間：<input type="text"  size="16" id="DTime" onclick="return false" /></td>
+								</tr>
+								<tr>						
+								<td colspan="4">客戶身分：
+									<input type="radio" name="CustomerIdfiy" onclick="return false" class="radio"/>
+									信用卡客戶
+									<input type="radio" name="CustomerIdfiy" onclick="return false" class="radio"/>
+									網銀客戶
+									<input type="radio" name="CustomerIdfiy" onclick="return false" class="radio"/>
+									其他					
+                                                               								
+                                                                        卡種：
+									<input type="radio" name="CardS" onclick="return false" class="radio"/>
+									信用卡
+									<input type="radio" name="CardS" onclick="return false" class="radio"/>
+									簽帳金融卡					
+								</td>  
+								</tr>
+								
+								<tr>
+									<td colspan="4">住家電話：<input type="text"  id="LivePhone" onclick="return false" size="12"/>
+								 公司電話：<input type="text"  id="CorPhone" onclick="return false" size="18"/>
+									手機：<input type="text"  id="Cellphone" onclick="return false" size="16"/></td>
+								</tr>
+								
+								<tr>
+									<td colspan="4">正卡人姓名：<input type="text"  size="10" id="ZName" onclick="return false"/>
+									正卡卡號：<input type="text"   size="18" id="CardNo" onclick="return false"/>
+									往來分行：<input type="text"   size="10" id="Branch" onclick="return false"/></td>
+								</tr>
+								
+								<tr>
+									<td colspan="4">附卡人姓名：<input type="text"  size="10" id="FuName" onclick="return false"/>
+									附卡卡號：<input type="text"  size="18" id="FuCard" onclick="return false"/></td>
+								</tr>
+								<tr><td colspan="4"><hr/></td></tr>
+								<tr>
+									<td colspan="4">內容說明：(1000字以內)<textarea id="Content"  style="height:200px;"></textarea></td>
+								</tr> 
+								<tr>
+								<td colspan="4">
+								處理人員：<input type="text"  id="CustomSerId" onclick="return false" size="20"/>    
+								客服主管簽章：<input type="text"   size="15"/>
+								處理部門：<input type="text"  id="SollveId" onclick="return false"  size="6"/></td>
+								
+							</tr>
+								<tr><td colspan="4"><hr/><span><strong>客訴中心處理資訊</strong></span></td></tr>
+								
+														
+								<tr>
+									<td colspan="4">案件等級：
+									<input type="radio" name="Rank" onclick="return false"/> A級
+									<input type="radio" name="Rank" onclick="return false"/> B級 
+									<input type="radio" name="Rank" onclick="return false"/> C級 
+									<input type="radio" name="Rank" onclick="return false"/> D級 
+									</td>
+								</tr>
+								
+								<tr>
+									<td>權責單位</td>
+								</tr>
+			
+								<tr>
+									<td id="td">
+										<input type="checkbox" name="Type" onclick="return false"/>個人金融部</td>
+									<td id="td">
+										<input type="checkbox" name="Type" onclick="return false"/>信用卡部</td>
+									<td id="td">
+										<input type="checkbox" name="Type" onclick="return false"/>業務管理部</td>
+								</tr>
+								
+								<tr>
+									<td id="td">
+										<input type="checkbox" name="Type" onclick="return false"/>人力資源處</td>
+									<td id="td">
+										<input type="checkbox" name="Type" onclick="return false"/>企業金融部</td>
+									<td id="td"> 
+										<input type="checkbox" name="Type" onclick="return false"/>國際部</td>
+								</tr>
+								
+								<tr>
+									<td id="td">
+										<input type="checkbox" name="Type" onclick="return false"/>債權管理部</td>
+									<td id="td">
+										<input type="checkbox" name="Type"onclick="return false"/>授信管理部</td>
+									<td id="td">
+										<input type="checkbox" name="Type" onclick="return false"/>財富管理部</td>
+								</tr>
+								
+								<tr>
+									<td id="td">
+										<input type="checkbox" name="Type" onclick="return false"/>信託部</td>
+									<td id="td">
+										<input type="checkbox" name="Type" onclick="return false"/>資訊部</td>
+									<td id="td">
+										<input type="checkbox" name="Type" onclick="return false"/>證券部</td>
+								</tr>
+								
+								<tr>
+									<td id="td">
+										<input type="checkbox" name="Type" onclick="return false"/>徵信部</td>
+								<tr><td colspan="4"><hr/></td></tr>
+								<tr>
+									<td colspan="4">客訴中心處理結果：（1000字以內）<textarea id="Result" class="text"  style="height:180Px;"></textarea></td>
+								</tr>
+								
+							
+								
+								<tr>									
+								<td>經辦：<input type="text"   size="8"/> </td>   
+								<td>襄理：<input type="text"   size="8"/></td>								
+								<td>副主管：<input type="text"   size="8"/></td>
+								<td>主管：<input type="text"   size="8"/></td>
+                                                                      
+								</tr>
+<tr><td colspan="3">業務管理部傳真(02)2550-8338或(02)2550-9839</td></tr>
+								</table>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</c:body>
+</c:html>
