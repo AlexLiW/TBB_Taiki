@@ -50,6 +50,14 @@ var UPreDesignateACForm = {
 					UPreDesignateACForm.doA008();
 				}
 			};
+			form.getControl("U_Account").onchange = function() {
+			  	let U_Account = form.getFieldValue("U_Account");
+			  	if(U_Account != null){
+					if(U_Account.length = 11){
+						UPreDesignateACForm.doA019();
+					}
+				}
+			};
 		},
 		
 		//2021.09.23-gemfor/lillian--電文由CQ01改為A008
@@ -162,6 +170,111 @@ var UPreDesignateACForm = {
 					}
 					
 				}, 1 * 1000);
+			});
+		},
+		//2022.11.02-gemfor/olivia--新增電文A019
+		doA019 : function(){
+			UPreDesignateACForm.sessionId = Jui.random.nextUuid();
+			var userId = CommonBusiness.getCurrentUser().userId;
+			UPreDesignateACForm.agentId = CommonBusiness.getFieldValue("Qs.User", userId, "FLoginName");
+			
+			var data = {
+			        "TXACN"	: form.getFieldValue("U_Account")
+			};
+			
+			var args = JSON.stringify({
+				"name" 		: "A019tbbapi",
+				"from" 		: "CSR",
+				"sessionId" : UPreDesignateACForm.sessionId,
+				"agentId" 	: UPreDesignateACForm.agentId,
+				"formData" 	: data
+			});
+			var bar = Jui.message.progress(function() {
+                Jui.message.hint("查詢資料中，請稍後...");
+            });
+			TBBUtil.doPost(JSON.parse(args), function(ret) {
+				setTimeout(function() {
+
+					console.log(ret);
+					if (ret == undefined) {
+						Jui.message.alert("發送電文失敗，詳情請洽資訊處！");
+						bar.close();
+						return;
+					}
+					if (ret.isSuccess == true) {
+						let ABEND = ret.form.ABEND;					//電文回應代號
+						var ABEND_text = "";
+						let ABEND_Dic = Utility.syncInvoke("Qs.Dictionary.getComboBoxItemsJson", {dictionaryId : "ec9b8729-0c00-a947-3c06-179e5676d840"}).data;
+						for (let i = 0; i < ABEND_Dic.length; i++) {
+							if (ABEND_Dic[i].value == ABEND) {
+								ABEND_text =  ABEND_Dic[i].text ? ABEND_Dic[i].text : ABEND ;
+								form.setFieldValue("U_TransactionResult", ABEND);			//交易結果
+								form.setFieldValue("U_TransactionResults", ABEND_text);	//交易結果說明
+								break;
+							}
+						}
+												
+						if(ABEND == "0000" || ABEND == "OKLR"){
+							var U_O_Data = [];							//用來將電文取回且整理好的值塞入網格
+							var formData = ret.form;					//取回傳資料
+							for (var i = 0; i <= formData.REC.length - 1; i++) {
+                 
+			                    //行庫別 
+			                    var U_BC = formData.REC[i].XAHBRH;     
+			                    BankNo = Utility.syncInvoke("Qs.Dictionary.getComboBoxItemsJson", {dictionaryId : "177dcfbb-a590-0d75-1395-d8f2cab1cb50"}).data;
+			                    for (var n = 0; n < BankNo.length; n++) {
+			                        if (BankNo[n].value == U_BC) {
+			                            U_BC = BankNo[n].text;
+			                        }
+			                    }
+			                    
+			                    //申請日期
+			                    var U_AppDate = formData.REC[i].XAHTDS;
+			                    if (U_AppDate != null && U_AppDate.trim() != "") {
+			                        U_AppDate = U_AppDate.substr(0, 4) + "/" + U_AppDate.substr(4, 2) + "/" + U_AppDate.substr(6, 2);
+			                    }
+	
+			                    //異動日期
+			                    var U_CDate = formData.REC[i].XAHTDE;
+			                    if (U_CDate != null && U_CDate.trim() != "") {
+			                        U_CDate = U_CDate.substr(0, 4) + "/" + U_CDate.substr(4, 2) + "/" + U_CDate.substr(6, 2);
+			                    }
+	
+								let data = {
+										"U_ID"				: formData.REC[i].XAHTKY,  //序號 XAHTKY
+										"U_BC"				: U_BC,  //行庫別 XAHBRH
+										"U_TAccount"		: formData.REC[i].XAHACN.substr(3, 16),  //轉帳帳號 XAHACN
+										"U_AppDate"			: U_AppDate, //申請日期 XAHTDS
+										"U_CDate"			: U_CDate //異動日期 XAHTDE
+								}
+								U_O_Data.push(data);
+								//查詢結果網格需以 申請日期 由遠到近 排序
+								U_O_Data = U_O_Data.sort(function(a,b){
+									if(a.U_AppDate > b.U_AppDate){
+										return 1;
+									}else if(a.U_AppDate < b.U_AppDate){
+										return -1;
+									}else if(a.U_AppDate == b.U_AppDate){
+										return 1;
+									}
+								});
+								
+								
+								form.getControl("U_Grid2").setValue(U_O_Data);
+								bar.close();
+							}
+						}else{
+							Jui.message.alert("查詢無資料！\r\n交易代號："+ ABEND_text);
+							bar.close();
+							return;
+						}
+					} else {
+						Jui.message.alert("發送電文失敗，詳情請洽資訊處！");
+						bar.close();
+						return;
+					}
+					
+				}, 1 * 10);
 			});
 		},
 }

@@ -39,7 +39,9 @@ var UDebitLossForm = {
         }
         form.getControl("U_LossType").onchange = UDebitLossForm.doChange;
 
-        form.getControl("U_GetECTime").onclick = UDebitLossForm.doPostA015;
+        form.getControl("U_GetECTime").onclick = UDebitLossForm.doPostA015(LossReportResult=0);
+		
+		form.getControl("U_Loss_Report_Result").onclick = UDebitLossForm.doLossReportResult;
 		
         //悠遊卡掛失交易結果成功時 U_GetECTime按鈕取消唯讀 20211003 hsin
         if(form.getFieldValue("U_Result_2")=="0000" || form.getFieldValue("U_Result_2")=="OKLR"){
@@ -203,11 +205,27 @@ var UDebitLossForm = {
 //            form.setFieldRequired("U_leisureDate", false);
 //            form.setFieldValue("U_leisureDate", null);
 //        }
-        
-       
-        
     },
     
+    doLossReportResult : function(){
+			var U_SAMDKEY_Result = form.getFieldValue("U_SAMDKEY_Result");
+			if(U_SAMDKEY_Result == "" || U_SAMDKEY_Result == null){
+				Jui.message.alert("請填寫「悠遊卡外顯卡號」");
+				return;
+			}
+			
+			//清空查詢結果欄位
+			TBBUtil.doClearFields("交易結果_取消掛失", null, null);
+			TBBUtil.doClearFields("交易結果說明_取消掛失", null, null);
+			
+			//檢核帳號是否輸入16碼
+			if(U_SAMDKEY_Result.length != 16){
+				Jui.message.alert("「帳號」請輸入16碼！");
+				form.setFieldValue("U_SAMDKEY_Result", null); 
+			}else{
+				UDebitLossForm.doPostA015(LossReportResult=1);
+			}
+	},
     //選擇帳號後發動A004，取得悠遊卡卡號(M.A004.SAMDKEY) 20211003 hsin
     doAccChange: function(){
       
@@ -717,15 +735,26 @@ var UDebitLossForm = {
     //抓取悠遊卡外顯卡號發動A015，將資料帶到A015的網格上顯示 20211003 hsin
     doPostA015 : function(){
         form.setFieldValue("U_GridA015",null);
+        if (LossReportResult==1){
+			if (!form.getFieldValue("U_SAMDKEY_Result")) {
+            	Jui.message.hint("無\"悠遊卡外顯卡號\"");
+           		return;
+        	} 
         
-        if (!form.getFieldValue("U_SAMDKEY")) {
-            Jui.message.hint("無\"悠遊卡外顯卡號\"");
-            return;
-        } 
+        	data = {
+            	"TXSAMD": form.getFieldValue("U_SAMDKEY_Result")// 悠遊卡外顯卡號
+        	};
+		}else{
+			if (!form.getFieldValue("U_SAMDKEY")) {
+            	Jui.message.hint("無\"悠遊卡外顯卡號\"");
+           		return;
+        	} 
         
-        data = {
-            "TXSAMD": form.getFieldValue("U_SAMDKEY")// 悠遊卡外顯卡號
-        };
+        	data = {
+            	"TXSAMD": form.getFieldValue("U_SAMDKEY")// 悠遊卡外顯卡號
+        	};
+		}
+        
         
         var args = JSON.stringify({
             "name"      : "A015tbbapi",
@@ -768,19 +797,17 @@ var UDebitLossForm = {
                     var cardDate = formData.REC[i].TXNDATE;
                     var cardTime = formData.REC[i].TXNTIME;
                     if (cardDate != null && cardDate.trim() != "") {
-                        cardDate = cardDate.substr(0, 4) + "-" + cardDate.substr(4, 2) + "-" + cardDate.substr(6, 2);
+                        cardDate = cardDate.substr(0, 4) + "/" + cardDate.substr(4, 2) + "/" + cardDate.substr(6, 2);
                     }
                     if (cardTime != null && cardTime.trim() != "") {
-                        cardTime = cardTime.substr(0, 2) + ":" + cardTime.substr(2, 2);
-                    }                    
-                    
+                        cardTime = cardTime.substr(0, 2) + ":" + cardTime.substr(2, 2) + ":" + cardTime.substr(4, 2);
+                    }   
                     if(txnCode != null && txnCode.trim() != "") {
                       var record = {
                         U_TXNCODE: txnCode,
                         U_A015TIME: cardDate +" "+ cardTime,
                         U_PROTYPE: proType,
                         U_RESULT: formData.REC[i].RESULT
-                        
                       };
                       DataGrid.push(record);
                     }
@@ -802,18 +829,42 @@ var UDebitLossForm = {
                     }
                     wlen1 = wlen1 - 1;
                 }
-                form.getControl("U_GridA015").setValue(DataGrid);
+                if (LossReportResult==1){
+					const FilterType = {
+						match: (obj, column) => ({value}) => obj[column] === value,
+					}	
+					let Conditions = {
+						
+					    U_RESULT: { type: 'match', value: '成功' },
+					   	U_TXNCODE: { type: 'match', value: '2446 掛失或取消掛失' },
+					   	U_PROTYPE: { type: 'match', value: '04 取消掛卡' }
+					}
+					const doFilter = (DataGrid, Conditions, cql) => {
+					    const compile = cql.replace(/\w+/g, column => {
+					        if (!Conditions[column]) { throw new Error(`column not found: ${column}`) }
+					        else if (!FilterType[Conditions[column].type]) { throw new Error(`filterType not found: ${Conditions[column].type}`) }
+					        return `F[C['${column}'].type](item, '${column}')(C['${column}'])`
+					    })
+					    const conditionCluster = new Function('F', 'C', `return item => ${compile}`)(FilterType, Conditions)
+					    return DataGrid.filter(conditionCluster)
+					}
+					if(doFilter(DataGrid, Conditions, 'U_TXNCODE && U_PROTYPE')[0] != undefined || doFilter(DataGrid, Conditions, 'U_TXNCODE && U_PROTYPE')[0] !=null){
+						form.setFieldValue("U_Result_6",'OK');
+						form.setFieldValue("U_ResultExplain_6", '成功');
+					}
+				}else{
+					form.getControl("U_GridA015").setValue(DataGrid);
+                	var MSGCOD = ret.form.ABEND;
+                	form.setFieldValue("U_Result_5", ret.form.ABEND);
+                	msgcodDicRet = Utility.syncInvoke("Qs.Dictionary.getComboBoxItemsJson", {dictionaryId : "ec9b8729-0c00-a947-3c06-179e5676d840"}).data;
+                	for (var i = 0; i < msgcodDicRet.length; i++) {
+                    	if (msgcodDicRet[i].value == MSGCOD) {
+                        	form.setFieldValue("U_ResultExplain_5", msgcodDicRet[i].text);
+                        	break;
+                    	}
+               		}
+				}
                 
-                
-                var MSGCOD = ret.form.ABEND;
-                form.setFieldValue("U_Result_5", ret.form.ABEND);
-                msgcodDicRet = Utility.syncInvoke("Qs.Dictionary.getComboBoxItemsJson", {dictionaryId : "ec9b8729-0c00-a947-3c06-179e5676d840"}).data;
-                for (var i = 0; i < msgcodDicRet.length; i++) {
-                    if (msgcodDicRet[i].value == MSGCOD) {
-                        form.setFieldValue("U_ResultExplain_5", msgcodDicRet[i].text);
-                        break;
-                    }
-                }
 
 
             }else {

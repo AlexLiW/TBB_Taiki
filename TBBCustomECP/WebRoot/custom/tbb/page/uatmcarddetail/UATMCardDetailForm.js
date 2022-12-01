@@ -15,6 +15,7 @@
 					2022/3/4 Emma 修改doInquire、doInquire2、doA001、doA001、doA012內分組名稱「金融卡發卡明細查詢」→「金融卡發卡明細檔」
 					2022/3/7 Emma 1. doA001:帳戶管理行改抓字典的值 2. doA004:全行代付改文中文顯示 3. 新增:getDicText 取字典的值
 					2022/3/11 Emma doA007 : 附屬帳號網格
+					2022/11/2 Olivia doA015 : 悠遊 DEBIT 卡外顯卡號檔
 ******************************************************s***************************/
 var UATMCardDetailForm = {
 		doLoad : function(){
@@ -782,9 +783,24 @@ var UATMCardDetailForm = {
 									"U_OMMACARD"	: OMMACARD_name,		//2022.02.10-lillian-卡別
 									"U_OCARDNO"		: formData.OCARDNO		//2022.02.10-lillian-新增信用卡卡號
 							}
-							
+console.log(data);
+
 							U_O_Data.push(data);
-							form.getControl("U_A012Grid").setValue(U_O_Data);
+							//form.getControl("U_A012Grid").setValue(U_O_Data);
+							form.getControl("U_A012Grid").loadData(U_O_Data.reverse());
+							
+							var U_OSAMDKEY = form.getControl("U_A012Grid").element.childNodes[0].childNodes[0].childNodes[0].childNodes[1].childNodes[2];
+							U_OSAMDKEY.setAttribute("id", "osamdkey");
+							U_OSAMDKEY.setAttribute("style", "color: #0040A0; cursor: default; text-decoration: underline;");
+							
+							var osamdkey = document.getElementById('osamdkey')
+							var args = {
+								"U_OSAMDKEY" : formData.OSAMDKEY
+							};
+							osamdkey.onclick = function(){
+								Utility.openTab("CUS.ECTransaction.Form.page", args, "悠遊卡交易明細表單", "quicksilver/image/16/Query.gif", "悠遊卡交易明細表單", null, "true", {lock:false});
+							};
+							
 							bar.close();
 							
 						}else{
@@ -903,4 +919,14 @@ var UATMCardDetailForm = {
 			}
 			return dicText;
 		},
+		doCardNumDetail : function() { 
+			var U_OSAMDKEY = form.getControl("U_A012Grid").getEventRow().data.U_OSAMDKEY;
+			CommonBusiness.openEntity("CUS.NumFile",form.getControl("U_A012Grid").getEventRow().data.U_OSAMDKEY);
+		},
+		doCardDetail : function() { 
+			var U_OSAMDKEY = form.getControl("U_A012Grid").getEventRow().data.U_OSAMDKEY;
+			CommonBusiness.openEntity("CUS.NumFile",form.getControl("U_A012Grid").getEventRow().data.U_OSAMDKEY);
+		}
+		
+		
 }
