@@ -920,12 +920,30 @@ console.log(data);
 			return dicText;
 		},
 		doCardNumDetail : function() { 
-			var U_OSAMDKEY = form.getControl("U_A012Grid").getEventRow().data.U_OSAMDKEY;
-			CommonBusiness.openEntity("CUS.NumFile",form.getControl("U_A012Grid").getEventRow().data.U_OSAMDKEY);
+			var U_CID = form.getControl("U_A012Grid").getEventRow().data.U_OSAMDKEY;
+			//CommonBusiness.openEntity("CUS.NumFile",form.getControl("U_A012Grid").getEventRow().data.U_OSAMDKEY);			
+             var args = {
+                U_CID : U_CID
+            };
+            
+            var options = {
+                width: 1685,
+                height: 740
+            };
+            Utility.openDialog("CUS.NumFile.Form.page", args, options);		
 		},
 		doCardDetail : function() { 
-			var U_OSAMDKEY = form.getControl("U_A012Grid").getEventRow().data.U_OSAMDKEY;
-			CommonBusiness.openEntity("CUS.NumFile",form.getControl("U_A012Grid").getEventRow().data.U_OSAMDKEY);
+			var U_Card_Number = form.getControl("U_A012Grid").getEventRow().data.U_OSAMDKEY;
+			//CommonBusiness.openEntity("CUS.NumFile",form.getControl("U_A012Grid").getEventRow().data.U_OSAMDKEY);			
+             var args = {
+                U_Card_Number : U_Card_Number
+            };
+            
+            var options = {
+                width: 1685,
+                height: 740
+            };
+            Utility.openDialog("CUS.ECTransaction.Form.page", args, options);		
 		}
 		
 		

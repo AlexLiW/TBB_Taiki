@@ -1,7 +1,9 @@
 
 var UATMCardDetailForm2 = {
 		doLoad : function(U_OSAMDKEY){
-			form.setFieldValue("U_OSAMDKEY",U_OSAMDKEY);
+			if(clientData.urlArgs.U_CID != undefined){
+				form.setFieldValue("U_CID",clientData.urlArgs.U_CID);
+			}
 			UATMCardDetailForm2.doChange();
 		},
 		
