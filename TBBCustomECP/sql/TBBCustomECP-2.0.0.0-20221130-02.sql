@@ -1,3 +1,4 @@
+--單元---------------------------------------------------------------------
 --CUS.limit---------------------------------------------------------------------
 
 create table TpCUSmlimit
@@ -2122,3 +2123,1543 @@ update TsForm set FGroupMode='Double' where FId='17887849-e3a0-0001-5ef2-005056c
 update TsMenu set FTreeSerial='002.002.004' where FId='2eda0929-0c00-a113-d406-179c17154130';
 update TsMenu set FTreeSerial='008.001.013' where FId='0800c056-5000-bf2a-7309-17d7a2145060';
 java setFormFields('17887849-e3a0-0001-5ef2-005056c00008', '定期存款餘額資料查詢', '17887849-e3a0-1001-5ef2-005056c00008', null, '', '基本資訊', '183d0ad0-e280-0a07-01c6-005056b8bfc7', '17887849-e3a0-1001-5ef2-005056c00008', 'U_Type,U_Button,U_UID,U_ACNO', '查詢結果', '183d0ad0-e2a0-0a07-01c6-005056b8bfc7', '17887849-e3a0-1001-5ef2-005056c00008', 'U_Hint,U_Grid,U_Total', '已解約資料查詢', '183d0b67-b850-0a07-01c6-005056b8bfc7', null, '', '基本資訊', '183d0b67-b860-0a07-01c6-005056b8bfc7', '183d0b67-b850-0a07-01c6-005056b8bfc7', 'U_Type2,U_Button2,U_UID2,U_ACNO2', '查詢結果', '183d0b67-b870-0a07-01c6-005056b8bfc7', '183d0b67-b850-0a07-01c6-005056b8bfc7', 'U_Hint2,U_Grid2,U_Total2');
+
+--/單元---------------------------------------------------------------------
+
+--電文---------------------------------------------------------------------
+USE [tbb-ecp]
+GO
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'0100c056-5000-cd79-de03-17984e384220', N'S604', 1, N'{
+   "name":"S604",
+   "from":"csr",
+   "sessionId":"UDepositFlagForm.sessionId",
+   "agentId":"UDepositFlagForm.agentId",
+   "formData":{
+      "TXID": "S004",
+      "ABEND" :"OKLR",
+      "ACN": "123456",
+      "CUSIDN": "123456",
+      "TYPE":"02",
+      "OPID":"123",
+      "AMOUNT":"123",
+      "DATCAT":"123",
+      "EVTTLR":"123",
+      "SEQTRN":"123",
+      "MESSAGE":"123"
+   }
+}', N'{
+   "result":{
+      "source":{
+         "ABEND":"OKLR",
+         "ACN":"123456",
+         "AMOUNT":"123",
+         "CUSIDN":"123456",
+         "DATCAT":"123",
+         "EVTTLR":"123",
+         "MESSAGE":"123",
+         "OPID":"123",
+         "SEQTRN":"123",
+         "TXID":"S004",
+         "TYPE":"02"
+      }
+   }
+}', N'{
+   "result":{
+      "source":{
+         "ABEND":"OKLR",
+         "ACN":"123456",
+         "AMOUNT":"123",
+         "CUSIDN":"123456",
+         "DATCAT":"123",
+         "EVTTLR":"123",
+         "MESSAGE":"123",
+         "OPID":"123",
+         "SEQTRN":"123",
+         "TXID":"S004",
+         "TYPE":"02"
+      }
+   }
+}', N'', N'S604-疑似不法-登錄交易-存提交易註記登錄', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'ec9b8729-0c00-a162-6507-179888a3ad90', N'S110', 1, N'{
+    "name": "S110",
+    "from": "csr",
+    "sessionId": "UAccountListForm.sessionId",
+    "agentId": "UAccountListForm.agentId",
+    "formData": {
+        "TXID": "S110",
+        "TYPE": "02",
+        "CUSIDN": "N123456789",
+        "ACN": "123"
+    }
+}', N'{
+    "result": {
+        "source": {
+            "result": {
+                "form": {
+                    "rec": [{
+                        "ACN": "00112114564",
+                        "BRHACC": "081",
+                        "DPITYP": "活期存款",
+                        "ATRCOD": "綜合存款",
+                        "IBHPWD": " ",
+                        "ADPIBAL": "626,358,600 ",
+                        "CLR": "0",
+                        "ITR": "0.40",
+                        "SABCOD": ""
+                    }, {
+                        "ACN": "00112154321",
+                        "BRHACC": "009",
+                        "DPITYP": "定期存款    ",
+                        "ATRCOD": "綜合存款",
+                        "IBHPWD": " ",
+                        "ADPIBAL": "123,451,234",
+                        "CLR": "0",
+                        "ITR": "0.53",
+                        "SABCOD": ""
+                    }]
+                }
+            }
+        }
+    }
+}', N'{
+    "rec": {
+        "ACN": "00112114564",
+        "BRHACC": "081",
+        "DPITYP": "活期存款    ",
+        "ATRCOD": "綜合存款                          ",
+        "IBHPWD": " ",
+        "ADPIBAL": "0000626358600 ",
+        "CLR": "0000000000000 ",
+        "ITR": "00040",
+        "SABCOD": "              "
+    }
+}
+
+
+
+', N'{
+    "REC": [{
+        "ACN": "00112114564",
+        "BRHACC": "081",
+        "DPITYP": "活期存款",
+        "ATRCOD": "綜合存款",
+        "IBHPWD": " ",
+        "ADPIBAL": "626,358,600 ",
+        "CLR": "0",
+        "ITR": "0.40",
+        "SABCOD": ""
+    }, {
+        "ACN": "00112154321",
+        "BRHACC": "009",
+        "DPITYP": "定期存款    ",
+        "ATRCOD": "綜合存款",
+        "IBHPWD": " ",
+        "ADPIBAL": "123,451,234",
+        "CLR": "0",
+        "ITR": "0.53",
+        "SABCOD": ""
+    }]
+}', N'S110-存款帳戶總覽查詢', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'0800c056-5000-5906-f809-1798fbb5d020', N'S134', 2, N'{
+   "name":"S134",
+   "from":"csr",
+   "sessionId":"000-000-000",
+   "agentId":"00000000",
+   "formData":{
+      "ACN": "S004",
+      "STADATE" :"1000101",
+      "ENDDATE": "1000101",
+      "LSTIME": "1000101",
+      "SIL":"Y",
+      "CTDNUM":"00000001",
+      "TYPE":"01"
+   }
+}', N'{
+    "result": {
+        "source": {
+            "CUST_ID": "M122801128",
+            "ADD_POINT": "0",
+            "getStatusCode": 200,
+            "CURR_POINT": "3",
+            "Record": [
+                {
+                    "CARD_NBR": "3567-XXXX-XXXX-8105",
+                    "CARD_PRODUCT": "381",
+                    "CTL_DESCR": "正常",
+                    "PRODUCT_DESCR": "ＪＣＢ哆啦Ａ夢悠遊晶緻卡"
+                }
+            ],
+            "CUT_POINT2": "3",
+            "BEG_POINT": "3",
+            "CUT_POINT1": "0",
+            "BONUS_EXPIR_DTE2": "110/10/31",
+            "DISB_POINT": "0",
+            "BONUS_EXPIR_DTE1": "109/10/31",
+            "PBDATA"    :"1234567890123456789012345678901234"
+        },
+        "isSuccess": true
+    },
+    "_header_": {
+        "success": true,
+        "timeCost": 5218
+    }
+}', N'', N'', N'S134-疑似不法-查詢交易-帳戶交易明細查詢作業', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'ec9b8729-0c00-216f-e307-1799c72d4d10', N'S602', 2, N'{
+    "name": "S602",
+    "from": "csr",
+    "sessionId": "PassbookLossForm.sessionId",
+    "agentId": "PassbookLossForm.agentId",
+    "formData": {
+        "TXID": "S602",
+        "ACN": "123"
+        "TYPE": "02",
+        "ITEM": "",
+    }
+}', N'{
+    "result": {
+        "source": {
+            "result": {
+                "form": {
+                    "EVTCODA2": "",
+                    "EVTCODA3": "",
+                    "EVTCODA4": "",
+                    "EVTCODA5": "",
+                    "EVTCODA6": "",
+                    "EVTCODA7": "",
+                    "EVTCODA8": "",
+                    "EVTCODB4": "",
+                    "EVTCODD2": "",
+                    "EVTCODD5": "",
+                    "EVTCODD6": "",
+                    "EVTCODD8": "",
+                    "rec": [{
+                        "ACN": "00112114564",
+                        "DATEVT": "1100524",
+                        "TRNTIM": "114401",
+                        "EVTTLR": "12345",
+                        "EVTBRH": "081",
+                    }, {
+                        "ACN": "00321321433",
+                        "DATEVT": "1050605",
+                        "TRNTIM": "231101",
+                        "EVTTLR": "12345",
+                        "EVTBRH": "001",
+                    }]
+                }
+            }
+        }
+    }
+}', N'{
+    "result": {
+        "source": {
+            "ACN": "00112114564",
+            "DATEVT": "1100524",
+            "TRNTIM": "114401",
+            "EVTTLR": "12345",
+            "EVTBRH": "081",
+            "EVTCODA2": "",
+            "EVTCODA3": "",
+            "EVTCODA4": "",
+            "EVTCODA5": "",
+            "EVTCODA6": "",
+            "EVTCODA7": "",
+            "EVTCODA8": "",
+            "EVTCODB4": "",
+            "EVTCODD2": "",
+            "EVTCODD5": "",
+            "EVTCODD6": "",
+            "EVTCODD8": "",
+        }
+    }
+}', N'', N'S602-事故登錄紀錄查詢', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'0800c056-5000-fd04-6809-179a25358310', N'NB01', 3, N'{
+   "name":"S009",
+   "from":"csr",
+   "sessionId":"000-000-000",
+   "agentId":"00000000",
+   "formData":{
+      "CARDNUM": "C",
+      "CUSIDN": "A123456789"
+   }
+}', N'', N'', N'', N'S009(NB01)-信用卡持卡人資料', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'ec9b8729-0c00-1711-f506-179ac906f9d0', N'S601', 3, N'{
+    "name": "S601",
+    "from": "csr",
+    "sessionId": "DepBalanceInqForm.sessionId",
+    "agentId": "DepBalanceInqForm.agentId",
+    "formData": {
+        "TXID": "S601",
+        "ACN": "123",
+        "TYPE": "02",
+    }
+}', N'{
+    "result": {
+        "source": {
+            "result": {
+                "form": {
+                    ARACOD: "02",
+                    CTTADR: "台北市松山區光復南路1號",
+                    CUSIDN: "16603077",
+                    MOBTEL: "0912345678",
+                    NAME: "無雨停",
+                    PMTADR: "臺北市南港區重陽路267號",
+                    TELNUM: "77066155",
+                }
+            }
+        }
+    }
+}', N'', N'', N'S601-客戶主檔查詢', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'0100c056-5000-1027-2209-179c0321bcd0', N'NB02', 4, N'{
+   "name":"S009",
+   "from":"csr",
+   "sessionId":"000-000-000",
+   "agentId":"00000000",
+   "formData":{
+      "CARDNUM": "C",
+      "CUSIDN": "A123456789"
+   }
+}', N'', N'', N'', N'S009(NB02)-信用卡持卡人資料', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'2eda0929-0c00-a113-d406-179c21529520', N'S421', 5, N'{
+    "name": "S421tbbapi",
+    "from": "csr",
+    "sessionId": "000-000-000",
+    "agentId": "00000000",
+    "formData": {
+        "ACN": "A123456789",
+        "CUSIDN": "",
+        "TYPE": "01"
+    }
+}', N'{
+    "result": {
+        "source": {
+            "result": {
+                "form": {
+                    "rec": [
+                        {
+                            "ACN": "00112114564",
+                            "BRHACC": "123這裡總共可能有17個字",
+                            "TYPE": "C",
+                            "FDPNUM": "1234567",
+                            "AMTFDP": "0000000000100",
+                            "TERM": "12",
+                            "ITR": "1%",
+                            "INTMTH": "A",
+                            "DPISDT": "1100210",
+                            "DUEDAT": "1110210",
+                            "TSFACN": "123456789101",
+                            "ILAZLFTM": "3",
+                            "AUTXFTM": "9",
+                            "TYPE1": "C",
+                            "TYPE2": "C",
+                            "FLAG1": "N"
+                        },
+                        {
+                            "ACN": "00112114564",
+                            "BRHACC": "123有17個字有17個字",
+                            "TYPE": "C",
+                            "FDPNUM": "7654321",
+                            "AMTFDP": "0000000000100",
+                            "TERM": "12",
+                            "ITR": "1%",
+                            "INTMTH": "A",
+                            "DPISDT": "1100210",
+                            "DUEDAT": "1120210",
+                            "TSFACN": "987654321101",
+                            "ILAZLFTM": "3",
+                            "AUTXFTM": "21",
+                            "TYPE1": "D",
+                            "TYPE2": "D",
+                            "FLAG1": "Y"
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}', N'{
+    "rec": {
+        "ACN": "00112114564",
+        "BRHACC": "123這裡總共可能有17個字",
+        "TYPE": "C",
+        "FDPNUM": "1234567",
+        "AMTFDP": "0000000000100",
+        "TERM": "12",
+        "ITR": "1%",
+        "INTMTH": "A",
+        "DPISDT": "1100210",
+        "DUEDAT": "1110210",
+        "TSFACN": "123456789101",
+        "ILAZLFTM": "3",
+        "AUTXFTM": "9",
+        "TYPE1": "C",
+        "TYPE2": "C",
+        "FLAG1": "N"
+    }
+}', N'{
+    "REC": [
+        {
+            "ACN": "00112114564",
+            "BRHACC": "123這裡總共可能有17個字",
+            "TYPE": "C",
+            "FDPNUM": "1234567",
+            "AMTFDP": "0000000000100",
+            "TERM": "12",
+            "ITR": "1%",
+            "INTMTH": "A",
+            "DPISDT": "1100210",
+            "DUEDAT": "1110210",
+            "TSFACN": "123456789101",
+            "ILAZLFTM": "3",
+            "AUTXFTM": "9",
+            "TYPE1": "C",
+            "TYPE2": "C",
+            "FLAG1": "N"
+        },
+        {
+            "ACN": "00112114564",
+            "BRHACC": "123有17個字有17個字",
+            "TYPE": "C",
+            "FDPNUM": "7654321",
+            "AMTFDP": "0000000000100",
+            "TERM": "12",
+            "ITR": "1%",
+            "INTMTH": "A",
+            "DPISDT": "1100210",
+            "DUEDAT": "1120210",
+            "TSFACN": "987654321101",
+            "ILAZLFTM": "3",
+            "AUTXFTM": "21",
+            "TYPE1": "D",
+            "TYPE2": "D",
+            "FLAG1": "Y"
+        }
+    ]
+}', N'S421-臺幣定期性存款明細', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'0100c056-5000-e845-4a0a-179cffdaaad0', N'CQ12', 6, N'{
+   "name" : "CQ12tbbapi",
+   "from" : "csr",
+   "sessionId" : UCertificateDisableForm.sessionId,
+   "agentId" : UCertificateDisableForm.agentId,
+   "formData" : {
+	"CUSIDN" : form.getFieldValue("U_CustID")
+   }
+}', N'', N'', N'', N'CQ12-一般網路銀行密碼中止使用', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'0100c056-5000-ab5c-a10f-179d0ae2f000', N'S102', 7, N'{
+   "name" : "S102tbbapi",
+   "from" : "csr",
+   "sessionId" : UCertificateDisableForm.sessionId,
+   "agentId" : UCertificateDisableForm.agentId,
+   "formData" : {
+	"CUSIDN" : form.getFieldValue("U_CustID")
+   }
+}', N'', N'', N'', N'S102-客戶基本資料檔查詢', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'ec9b8729-0c00-6e3c-200b-179d4b836ad0', N'S105', 8, N'{
+   "name":"S105",
+   "from":"csr",
+   "sessionId":"000-000-000",
+   "agentId":"00000000",
+   "formData":{
+        "TXID": "S601",
+      "ID": "A123456789",
+   }
+}', N'', N'', N'', N'S105-網銀客户資料', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'ec9b8729-0c00-7148-0609-179e99b3de20', N'CQ04', 9, N'{
+   "name" : "CQ04tbbapi",
+   "from" : "csr",
+   "sessionId" : UVoiceBankForm.sessionId,
+   "agentId" : UVoiceBankForm.agentId,
+   "formData" : {
+	"ACN" : "12331111121"
+   }
+}', N'', N'', N'', N'CQ04-電話銀行主檔', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'2eda0929-0c00-8f3a-bb07-179e9b8c5770', N'A005', 10, N'{
+   "name":"A005",
+   "from":"csr",
+   "sessionId":"000-000-000",
+   "agentId":"00000000",
+   "formData":{
+      "VIACN": "1234123412341234"
+   }
+}', N'{
+    "result": {
+        "source": {
+            "OVACN": "1234123412341234",
+            "OACNN": "4321432143214321",
+            "OCODE": "1",
+            "NAME": "張君雅"
+        }
+    }
+}', N'', N'', N'A005-虛擬帳號查詢', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'2eda0929-0c00-262e-cd02-179f476dcb70', N'A001', 11, N'{
+   "name":"A001",
+   "from":"csr",
+   "sessionId":"000-000-000",
+   "agentId":"00000000",
+   "formData":{
+      "TXACN": "1234123412341234"
+   }
+}', N'{
+    "result": {
+        "source": {
+            "TXACN":"1234123412341234",
+ "CUSIDN11": "A123456789",
+            "FWITYN": "N",
+            "ABFEE1": "123",
+            "ABFEE2": "456",
+            "BRHACC": "789",
+            "SEQCRD": "1234567",
+            "CRDNUM": "2",
+            "STSCOD": "A",
+            "ISUCNT": "5",
+            "PINCNT": "68",
+            "CASAMT": "20000",
+            "TRAAMT1": "30000",
+            "TRAAMT2": "10000",
+            "TXDATE": "1100609",
+            "TRINCT": "3",
+            "TRINFG": "Y",
+            "TROUFG": "Y",
+            "LSTDAT": "1100601",
+            "MEGEYN": "Y",
+            "MEGECT": "15",
+            "OPDATE": "11006",
+            "CHEKNB": "1",
+            "DEPOYN": "1",
+            "EXPDAT": "1100602",
+            "CARCOD": "Y",
+            "ABAVCT": "15",
+            "ABUSCT": "5",
+            "ABAVMT": "10",
+            "ABAVCM": "20021",
+            "ABLSDT": "1000605",
+            "ABAVCTX": "20",
+            "ABUSCTX": "11",
+            "ABAVMTX": "12",
+            "ABAVCMX": "12345",
+            "ABLSDTX": "1100604",
+            "WDDPCNT": "25",
+            "TFDPCNT": "30",
+            "EXPYM": "11112",
+            "GRPCOD ": "321",
+            "FEEBRH ": "654",
+            "OVERMGR": "N",
+            "TOTUSCT": "13",
+            "CARDTYP": "C",
+            "VSEXPYM": "2606",
+            "SMART": "Y",
+            "ABICSEQ": "12345678",
+            "SAGCNT": "3",
+            "ABSECOND": "333",
+            "ABKEYTP": "1",
+            "ABOFFSET": "123456",
+            "VSDBYN": "Y",
+            "ABFEEVW": "12",
+            "ABFEEVT": "14",
+            "ABNCAMT": "2000"
+           
+        }
+    }
+}', N'', N'', N'A001-金融卡發卡主檔查詢', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'2eda0929-0c00-262e-cd02-179f53dae770', N'A010', 12, N'{
+   "name": "A010",
+   "from" : "CSR",
+   "sessionId" : UATMCardDetailForm.sessionId,
+   "agentId" : UATMCardDetailForm.agentId,
+   "formData" : data
+}', N'', N'', N'', N'A010-簽帳卡', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'2eda0929-0c00-262e-cd02-179f54cade50', N'A011', 13, N'{
+   "name":"A011",
+   "from":"csr",
+   "sessionId":"000-000-000",
+   "agentId":"00000000",
+   "formData":{
+      "ACN": "1234123412341234"
+   }
+}', N'{
+    "result": {
+        "source": {
+            "ACN": "12345678900",
+            "OSEQCRD": "123",
+            "OCRDNUM": "5",
+            "OSEQREC": "1234567",
+            "OSTSCOD": "A",
+            "ODATAPL": "1080102",
+            "ODATISU": "1080106",
+            "ODATUSE": "1080111"
+        }
+    }
+}', N'', N'', N'A011-金融卡發卡歷史查詢', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'0100c056-5000-5c46-050f-179f8de842a0', N'BSIK', 14, N'{
+   "name":"BSIK",
+   "from":"csr",
+   "sessionId":"000-000-000",
+   "agentId":"00000000",
+   "formData":{
+      "ID": "A123456789",
+      "ORG": "150"
+   }
+}', N'', N'', N'', N'BSIK-信用卡持卡總覽查詢', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'2eda0929-0c00-327b-ed06-179f93c9a600', N'A012', 15, N'{
+    "name": "A012",
+    "from": "csr",
+    "sessionId": "000-000-000",
+    "agentId": "00000000",
+    "formData": {
+        "TXACN": "12345678900",
+        "TXSEQ": "1234567"
+    }
+}', N'{
+    "result": {
+        "source": {
+            "OACN": "00162058886",
+            "OSEQCRD": "0010001",
+            "OCRDNUM": "1",
+            "OSEQREC": "00000001",
+            "OSTSCOD": "A",
+            "ODATAPL": "",
+            "ODATISU": "",
+            "ODATUSE": "",
+            "OTIMUSE": "",
+            "OTLRUSE": "",
+            "ODATCNL": "",
+            "OTIMCNL": "",
+            "OTLRCNL": "",
+            "ODATLST": "1100604",
+            "OTIMLST": "170508",
+            "OREASON": "",
+            "OEXPDAY": "",
+            "OATMTRTI": "",
+            "OCARDNO": "",
+            "OMMACARD": "I",
+            "OABSECOND": "123",
+            "OABKEYTP": "",
+            "OABTYPE": "",
+            "OORGYON": "",
+            "OSAMDKEY": "",
+            "OSALEYON": "",
+            "OEMPNO": "",
+            "OSNDATE": "",
+            "OSMTPAY": ""
+        }
+    }
+}', N'', N'', N'A012-金融卡發卡明細檔查詢', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'0100c056-5000-9412-570e-179f9c2b3ca0', N'BSHI', 16, N'{
+   "name":"BSIH",
+   "from":"csr",
+   "sessionId":"000-000-000",
+   "agentId":"00000000",
+   "formData":{
+             "TYPE":"" ,
+            "CARDNUM":  form.getFieldValue("U_CardNum")
+   }
+}', N'  ', N'', N'', N'BSHI-信用卡歷史繳款狀況查詢', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'2eda0929-0c00-6546-9f07-17a10411e2e0', N'A006', 17, N'{
+   "name":"A006",
+   "from":"csr",
+   "sessionId":"000-000-000",
+   "agentId":"00000000",
+   "formData":{
+      "TXACN": "00162058886",
+      "USERDATA": ""
+   }
+}', N'', N'', N'', N'A006-Debit金融卡解圈查詢', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'ec9b8729-0c00-835b-730f-17a137ce8aa0', N'CQ02', 18, N'{
+   "name" : "CQ02tbbapi",
+   "from" : "csr",
+   "sessionId" : UVoiceHistoryForm.sessionId,
+   "agentId" : UVoiceHistoryForm.agentId,
+   "formData" : {
+	"ACN" : "12331111121"
+   }
+}', N'', N'', N'', N'CQ02-語音查詢歷史資料檔', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'ec9b8729-0c00-835b-730f-17a13f634b70', N'CQ06', 19, N'{
+   "name" : "CQ06tbbapi",
+   "from" : "csr",
+   "sessionId" : UNetBankForm.sessionId,
+   "agentId" : UNetBankForm.agentId,
+   "formData" : {
+	"CUSIDN" : "16603077"
+   }
+}', N'', N'', N'', N'CQ06-網路銀行事故檔', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'2eda0929-0c00-5f26-6a01-17a1449bc310', N'BSB1', 20, N'{
+    "name": "BSB1",
+    "from": "csr",
+    "sessionId": "000-000-000",
+    "agentId": "00000000",
+    "formData": {
+        "IDNUM": "A123456789"
+    }
+}', N'', N'', N'', N'BSB1-持卡人帳單詳細資料', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'0100c056-5000-7e24-7e0d-17a18b79d610', N'S103', 21, N'{
+   "name":"S103",
+   "from":"csr",
+   "sessionId":"UDepositFlagForm.sessionId",
+   "agentId":"UDepositFlagForm.agentId",
+   "formData":{
+      "ACN": "123456",
+      "ITEM":"02",
+      "TLRST":"123",
+      "MEMO":"123",
+   }
+}', N'', N'', N'', N'S103-金融卡掛失', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'2eda0929-0c00-8d1e-9704-17a18d2e1f50', N'BSB2', 22, N'{
+    "name": "BSB2",
+    "from": "csr",
+    "sessionId": "000-000-000",
+    "agentId": "00000000",
+    "formData": {
+        "IDNUM": "A123456789",
+        "STMTDATE": "20210616",
+        "STMNBR": "123",
+        "USERDATA": ""
+    }
+}', N'', N'', N'', N'BSB2-持卡人帳單詳細資料', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'ec9b8729-0c00-ed0d-9f0b-17a1966ee990', N'CQ13', 23, N'{
+   "name" : "CQ13tbbapi",
+   "from" : "csr",
+   "sessionId" : EBankingInfoForm.sessionId,
+   "agentId" : EBankingInfoForm.agentId,
+   "formData" : {
+	"CUSIDN" : form.getFieldValue("U_UID")
+   }
+}', N'', N'', N'', N'CQ13-網銀主檔', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'ec9b8729-0c00-650a-ab0c-17a1cf23d7d0', N'CQ14', 24, N'{
+   "name" : "CQ14tbbapi",
+   "from" : "csr",
+   "sessionId" : EBankingInfoForm.sessionId,
+   "agentId" : EBankingInfoForm.agentId,
+   "formData" : {
+	"CUSIDN" : form.getFieldValue("U_UID")
+   }
+}', N'', N'', N'', N'CQ14-網路銀行轉帳延伸檔', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'ec9b8729-0c00-650a-ab0c-17a1cf3afcd0', N'CQ15', 25, N'{
+   "name" : "CQ15tbbapi",
+   "from" : "csr",
+   "sessionId" : EBankingInfoForm.sessionId,
+   "agentId" : EBankingInfoForm.agentId,
+   "formData" : {
+	"CUSIDN" : form.getFieldValue("U_UID")
+   }
+}', N'', N'', N'', N'CQ15-行動銀行快速登入記錄檔', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'0100c056-5000-330f-180b-17a1cfd060a0', N'A014', 26, N'{
+   "name" : "A014tbbapi",
+   "from" : "csr",
+   "sessionId" : UDebitLossForm.sessionId,
+   "agentId" : UDebitLossForm.agentId,
+   "formData" : {
+        "TXSAMD": "7305059999999991",// 悠遊卡 DEBIT 卡外顯卡號
+       "TXSEL": "03"// 掛失
+   }
+}', N'', N'', N'', N'A014-掛失／取消掛失悠遊DEBIT卡悠遊功能', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'2eda0929-0c00-2477-180e-17a1d340e940', N'BSTD', 27, N'{
+    "name": "BSTD",
+    "from": "csr",
+    "sessionId": "000-000-000",
+    "agentId": "00000000",
+    "formData": {
+        "ORG": "150",
+        "TYPE": "123",
+        "CARDNUM": "1234123412341234",
+        "USERDATA": ""
+    }
+}', N'', N'', N'', N'BSTD-卡片新增消費明細', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'2eda0929-0c00-8841-b504-17a29abb7f60', N'BDS1', 28, N'{
+    "name": "BDS1",
+    "from": "csr",
+    "sessionId": "000-000-000",
+    "agentId": "00000000",
+    "formData": {
+        "ORG": "123",
+        "TYPE": "150",
+        "CARDNUM": "1234123412341234",
+        "STMTNO": "123",
+        "DTEACCRTHRU": "1234567"
+    }
+}', N'', N'', N'', N'BDS1-卡片當期消費利息算法', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'2eda0929-0c00-8841-b504-17a29e5804a0', N'BDS2', 29, N'{
+    "name": "BDS2",
+    "from": "csr",
+    "sessionId": "000-000-000",
+    "agentId": "00000000",
+    "formData": {
+        "ORG": "123",
+        "TYPE": "150",
+        "CARDNUM": "1234123412341234",
+        "STMTNO": "123",
+        "DTEACCRTHRU": "1234567",
+        "USERDATA": ""
+    }
+}', N'', N'', N'', N'BDS2-卡片當期消費利息算法', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'ec9b8729-0c00-084c-280a-17a2c7c78e00', N'CQ11', 30, N'{
+   "name" : "CQ11tbbapi",
+   "from" : "csr",
+   "sessionId" : XMLdocForm.sessionId,
+   "agentId" : XMLdocForm.agentId,
+   "formData" : {
+	"CUSIDN" : form.getFieldValue("U_CustID")
+   }
+}', N'', N'', N'', N'CQ11-XML憑證資料檔', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'0100c056-5000-d840-950b-17a2c8d94d20', N'Get_Result', 31, N'{
+   "name":"Get_Result",
+   "from":"csr",
+   "sessionId":"sessionId",
+   "agentId":"agentId",
+   "formData":{
+      "Cust_ID": "66666666",
+      "Bill_No" :"1",
+      "SDate": "",
+      "EDate": ""
+   }
+}', N'', N'', N'', N'Get_Result', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'0100c056-5000-d840-950b-17a2c8e40890', N'Get_Html_img', 32, N'{
+   "name":"Get_Html_img",
+   "from":"csr",
+   "sessionId":"sessionId",
+   "agentId":"agentId",
+   "formData":{
+      "Cust_ID": "66666666",
+      "Bill_No" :"1",
+      "Query_Date": "",
+      "User_ID": "113276",
+      "Project_No":"15623"
+   }
+}
+', N'', N'', N'', N'Get_Html_img', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'0100c056-5000-d840-950b-17a2c8f4f3e0', N'Get_Html', 33, N'{
+   "name":"Get_Html",
+   "from":"csr",
+   "sessionId":"sessionId",
+   "agentId":"agentId",
+   "formData":{
+      "Cust_ID": "66666666",
+      "Bill_No" :"1",
+      "Query_Date": "",
+      "User_ID": "113276",
+      "Project_No":"15623"
+   }
+}
+', N'', N'', N'', N'Get_Html', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'2eda0929-0c00-4062-9a02-17a3281428c0', N'BSHC', 34, N'{
+    "name": "BSHC",
+    "from": "csr",
+    "sessionId": "000-000-000",
+    "agentId": "00000000",
+    "formData": {
+        "CARDNUM": "1234123412341234",
+        "USERDATA": ""
+    }
+}', N'', N'', N'', N'BSHC-卡片歷史消費紀錄', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'ec9b8729-0c00-dc1b-950c-17a32a45c2e0', N'CQ10', 35, N'{
+   "name" : "CQ10tbbapi",
+   "from" : "csr",
+   "sessionId" : UNetBankDepACNOForm.sessionId,
+   "agentId" : UNetBankDepACNOForm.agentId,
+   "formData" : {
+	"CUSIDN" : form.getFieldValue("U_CustID")
+   }
+}', N'', N'', N'', N'CQ10-網路銀行轉入帳號資料檔', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'0100c056-5000-9243-6408-17a32d1c3e30', N'BSD1', 36, N'{
+"name": "BSD1tbbapi",
+            "from": "csr",
+            "sessionId": UYearsbillmonthForm.sessionId,
+            "agentId": UYearsbillmonthForm.agentId,
+            "formData":{
+            "CARDNUM": form.getFieldValue("U_CardNum")
+        }
+}', N'', N'', N'', N'BSD1-信用卡帳單資料', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'0100c056-5000-9243-6408-17a32d281ea0', N'BSD2', 37, N'{
+ "name": "BSD2tbbapi",
+            "from": "csr",
+            "sessionId": UYearsbillmonthForm.sessionId,
+            "agentId": UYearsbillmonthForm.agentId,
+            "formData":{
+            "CARDNUM": form.getFieldValue("U_CardNum"),
+            "STMTDATE" : grid.data.U_Stmtdate.replace("*", ""),
+            "STMNBR" : grid.data.U_Tradingnote,
+        }
+}', N'', N'', N'', N'BSD2-信用卡帳單資料(明細)', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'2eda0929-0c00-9c71-8308-17a36ecae120', N'BSAI', 38, N'{
+    "name": "BSAI",
+    "from": "csr",
+    "sessionId": "000-000-000",
+    "agentId": "00000000",
+    "formData": {
+        "CARDNUM": "1234123412341234",
+        "USERDATA": ""
+    }
+}', N'', N'', N'', N'BSAI-已授權未請款資料', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'ec9b8729-0c00-957f-080b-17a36f4fd3f0', N'CQ09', 39, N'{
+   "name" : "CQ09tbbapi",
+   "from" : "csr",
+   "sessionId" : UENetBankRLForm.sessionId,
+   "agentId" : UENetBankRLForm.agentId,
+   "formData" : {
+	"CUSIDN" : form.getFieldValue("U_UID")
+   }
+}', N'', N'', N'', N'CQ09-企業網路銀行關係戶資料檔', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'ec9b8729-0c00-957f-080b-17a36f796260', N'CQ05', 40, N'{
+   "name" : "CQ05tbbapi",
+   "from" : "csr",
+   "sessionId" : UENetBankRLForm.sessionId,
+   "agentId" : UENetBankRLForm.agentId,
+   "formData" : {
+	"CUSIDN" : form.getFieldValue("U_UID2"),
+	"BANKCOD" : form.getFieldValue("U_BankNo"),
+	"TSFACN" : form.getFieldValue("U_TransACNO"),
+   }
+}', N'', N'', N'', N'CQ05-網路銀行轉帳限額檔', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'ec9b8729-0c00-957f-080b-17a383942df0', N'CQ08', 41, N'{
+   "name" : "CQ08tbbapi",
+   "from" : "csr",
+   "sessionId" : UENetBankRLTransForm.sessionId,
+   "agentId" : UENetBankRLTransForm.agentId,
+   "formData" : {
+	"CUSIDN" : form.getFieldValue("U_UID"),
+	"CORIDN" : form.getFieldValue("U_RLUID"),
+   }
+}', N'', N'', N'', N'CQ08-企業網路銀行關係戶轉帳約定資料檔', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'0100c056-5000-785f-0408-17a38504b320', N'caCaseQuery', 42, N'{
+   "name" : "caCaseQuerytbbapi",
+   "from" : "csr",
+   "sessionId" : "sessionId",
+   "agentId" :"agentId",
+   "formData" : "&qtype=2&qitem=A10908210013"
+  }', N'  {"source":{"data":[{"CENDATE":"","UNCASEDESCTOTH":"","RCVNO":"A10908210013","DOCSTATUS":"39","CENCARD":"","CUSTID":"H225720352","CENCOIN":"10","EMP2NM":"徵信人員二","CUSTNM":"劉紜慈","RCVDATE":"110/06/03"},{"CENDATE":"","UNCASEDESCTOTH":"","RCVNO":"A10908210013","DOCSTATUS":"39","CENCARD":"86:樂施公益卡(一卡通),43:鈦金商旅卡,85:福獅公益卡(一卡通),","CUSTID":"H225720352","CENCOIN":"10","EMP2NM":"徵信人員二","CUSTNM":"劉紜慈","RCVDATE":"110/06/03"}]},"isSuccess":true}', N'', N'{
+   "result":{
+      "data":[
+         {
+            "RCVNO":"A1XXXXXXXXX3",
+            "CUSTID":"H2XXXXXXX2",
+            "CUSTNM":"王ＯＯ",
+            "CENCOIN":"10",
+            "CENDATE":"2020/10/08",
+            "DOCSTATUS":"77",
+            "CENCARD":"86 ",
+            "UNCASEDESCTOTH":""
+         }
+      ]
+   },
+   "post getStatusCode":200,
+   "isSuccess":true,
+   "_header_":{
+      "success":true,
+      "timeCost":822
+   }
+}', N'eloan-信用卡申請案件查詢caCaseQuery', N'0100c056-5000-785f-0408-17a384ef45f0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'2eda0929-0c00-8b17-060a-17a3bdc93b90', N'BSIH', 43, N'{
+    "name": "BSIH",
+    "from": "csr",
+    "sessionId": "000-000-000",
+    "agentId": "00000000",
+    "formData": {
+        "ORG": "150",
+        "TYPE": "123",
+        "CARDNUM": "1234123412341234"
+    }
+}', N'', N'', N'', N'BSIH-卡片基本資料', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'ec9b8729-0c00-7932-750a-17a3cb1dcec0', N'CQ07', 44, N'{
+   "name" : "CQ07tbbapi",
+   "from" : "csr",
+   "sessionId" : UENetBankRLLinkForm.sessionId,
+   "agentId" : UENetBankRLLinkForm.agentId,
+   "formData" : {
+	"CORIDN" : form.getFieldValue("U_RLUID"),
+   }
+}', N'', N'', N'', N'CQ07-企業網路銀行關係戶連結檔', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'2eda0929-0c00-8b17-060a-17a3d04e5930', N'CQ01', 45, N'{
+   "name" : "CQ01",
+   "from" : "csr",
+   "sessionId" : UVoiceHistoryForm.sessionId,
+   "agentId" : UVoiceHistoryForm.agentId,
+   "formData" : {
+	"CUSIDN" : "A123456789"
+   }
+}', N'', N'', N'', N'CQ01-約定轉帳帳號檔', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'2eda0929-0c00-9402-910b-17a4102a2dc0', N'BSNL', 46, N'{
+    "name": "BSNL",
+    "from": "csr",
+    "sessionId": "000-000-000",
+    "agentId": "00000000",
+    "formData": {
+        "NAMECH": "王大明"
+    }
+}', N'', N'', N'', N'BSNL-客戶中文姓名及特約商店', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'2eda0929-0c00-1409-8506-17a56ab83b10', N'BSPO', 47, N'{
+    "name": "BSPO",
+    "from": "csr",
+    "sessionId": "000-000-000",
+    "agentId": "00000000",
+    "formData": {
+        "CARDNUM": "234123412341234",
+        "EFFDATE": "20210629"
+    }
+}', N'', N'', N'', N'BSPO-客戶結清金額', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'0100c056-5000-5106-a602-17a5c1be8dd0', N'BSIC', 48, N'{
+            "name" : "BSICtbbapi",
+            "from" : "csr",
+            "sessionId" : ContactFormBTN.sessionId,
+            "agentId" : ContactFormBTN.agentId,
+            "formData" :{
+            "IDNUM" : form.getFieldValue("U_CustID")//統一編號
+        }
+}', N'', N'', N'', N'BSIC-查詢客戶基本資料', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'0100c056-5000-5106-a602-17a5c50e41f0', N'S603', 49, N'{
+            "name" : "S603tbbapi",
+            "from" : "csr",
+            "sessionId" : ContactFormBTN.sessionId,
+            "agentId" : ContactFormBTN.agentId,
+            "formData" : {
+            "ACN" : form.getFieldValue("U_CustID"),//帳號
+            "CUSIDN":form.getFieldValue("U_CustID")//統一編號
+        }
+}', N'', N'', N'', N'S603-查詢帳戶明細', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'0100c056-5000-807a-0408-17c44ba141c0', N'A015', 52, N'{
+   "name" : "A015",
+   "from" : "csr",
+   "sessionId" : UDebitLossForm.sessionId,
+   "agentId" : UDebitLossForm.agentId,
+   "formData" : {
+       "TXSAMD": form.getFieldValue("U_SAMDKEY")// 悠遊卡外顯卡號,
+       "USERDATA":""
+   }
+}', N'
+{"source":{"result":{"source":{"REC":[{"TXNCODE":"    ","PROTYPE":"  ","TXNDATE":"        ","RESULT":" ","TXNTIME":"      "},{"TXNCODE":"    ","PROTYPE":"  ","TXNDATE":"        ","RESULT":"          ","TXNTIME":"      "},{"TXNCODE":"    ","PROTYPE":"  ","TXNDATE":"        ","RESULT":"          ","TXNTIME":"      "},{"TXNCODE":"    ","PROTYPE":"  ","TXNDATE":"        ","RESULT":"          ","TXNTIME":"      "},{"TXNCODE":"    ","PROTYPE":"  ","TXNDATE":"        ","RESULT":"          ","TXNTIME":"      "},{"TXNCODE":"    ","PROTYPE":"  ","TXNDATE":"        ","RESULT":"          ","TXNTIME":"      "},{"TXNCODE":"    ","PROTYPE":"  ","TXNDATE":"        ","RESULT":"          ","TXNTIME":"      "},{"TXNCODE":"    ","PROTYPE":"  ","TXNDATE":"        ","RESULT":"          ","TXNTIME":"      "},{"TXNCODE":"    ","PROTYPE":"  ","TXNDATE":"        ","RESULT":"          ","TXNTIME":"      "},{"TXNCODE":"    ","PROTYPE":"  ","TXNDATE":"        ","RESULT":"          ","TXNTIME":"      "}],"ABEND":"ENRD","USERDATA":"                                                  "},"isSuccess":true}},"isSuccess":true}', N'', N'', N'A015-查詢掛失/取消掛失悠遊卡結果', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'0800c056-5000-f41a-0103-17c923616230', N'A008', 50, N'{
+      "name" : "A008tbbapi",
+      "from" : "CSR",
+      "sessionId" : UPreDesignateACForm.sessionId,
+      "agentId" : UPreDesignateACForm.agentId,
+      "formData" : data
+}', N'', N'', N'', N'A008-金融卡約定轉入帳號查詢', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'0800c056-5000-f41a-0103-17c9249ce810', N'A004', 51, N'{
+   "name" : "A004tbbapi",
+   "from" : "CSR",
+   "sessionId" : UATMCardDetailForm.sessionId,
+   "agentId" : UATMCardDetailForm.agentId,
+   "formData" : data
+}', N'', N'', N'', N'A004-金融卡明細查詢', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'2eda0929-0c00-7463-a90b-17ee2d8fe9e0', N'A007', 53, N'{
+   "name" : "A007tbbapi",
+   "from" : "CSR",
+   "sessionId" : UATMCardDetailForm.sessionId,
+   "agentId" : UATMCardDetailForm.agentId,
+   "formData" : data
+}', N'', N'', N'', N'A007-附屬帳號查詢', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'c7bfb856-5000-c601-070a-184131183550', N'CQ20', 54, N'{
+ "name" : "CQ20",
+ "from" : "csr",
+ "sessionId" : "PayOnlineForm.sessionId",
+"agentId": "PayOnlineForm.agentId",
+ "formData" : {
+                      "CUSIDN":"A123456814",
+                      "TXID": "CQ20"
+            }
+}', N'{
+    "result": {
+        "source": {
+            "result": {
+                "form": {
+                                        "INPLEN": "600",
+					"INPZZZ": "0",
+                                        "TXID": "CQ20",
+                                        "ABEND": "OKLR",
+                                        "TSFACN": "1234567890123456",
+                                        "TSFDAT": "1111025",
+                                        "FEEFLG": "Y", 
+                                       "TSFTIM": "123020",
+                                        "TRAAMT01": "Y",
+					"TRAAMT02": "Y",
+					"TRAAMT03": "Y",
+					"TRAAMT04": "Y",
+					"TRAAMT05": "Y",
+					"TRAAMT06": "Y",
+                                       "TRAAMT07": "Y",
+					"TRAAMT08": "Y",
+					"TRAAMT09": "Y",
+					"TRAAMT10": "Y",
+					"TRAAMT11": "Y",
+					"TRAAMT12": "100",
+					"TRAAMT13": "100",
+					"TRAAMT14": "1000",
+					"TRAAMT15": "100",
+					"TRAAMT16": "200",
+					"TRAAMT17": "Y",
+					"TRAAMT18": "1230",
+					"TRAAMT19": "12330",
+					"TRAAMT20": "13400",
+                                       "TRAAMT21": "12300",
+					"TRAAMT22": "1200",
+					"TRAAMT23": "Y",
+					"TRAAMT24": "123",
+					"TRAAMT25": "Y",
+					"TRAAMT26": "Y",
+					"TRAAMT27": "Y",
+					"TRAAMT28": "123",
+					"TRAAMT29": "123"
+                       }
+		}			
+        }
+    }
+}', N'', N'', N'CQ20-累計轉帳金額檔', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'c7bfb856-5000-c601-070a-18418cee2d30', N'CQ18', 55, N'{
+ "name" : "CQ18",
+ "from" : "csr",
+ "sessionId" : "GlobalNetworkForm.sessionId",
+"agentId": "GlobalNetworkForm.agentId",
+ "formData" : {"HKID":"37563088",
+                      "TXID": "CQ18"
+          }
+}
+', N'{
+    "result": {
+        "source": {
+            "result": {
+                "form": {
+                                        "INPLEN": "600",
+					"INPZZZ": "0",
+                                        "TXID": "CQ18",
+                                        "ABEND": "OKLR",
+                                        " VID": "1234567890",
+                                        "CUSCODE": "1",
+                                        "NAME1 ": "張心填", 
+                                       "NAME2 ": "張心其",
+                                        "ADDR1": "基隆市大港區一哩路19號",
+					"ADDR2": "基隆市大港區一哩路20號",
+					"HKCUSID": "8888888888",
+					"STSCOD": "Y",
+					"PROMODE": "1",
+					"DATAPL": "1101027",
+                                       "DATDLT": "1101111",
+					"UPDDATE": "1101112",
+					"UPDTIME": "1101025",
+					"USERID": "林嘉惠",
+					"CNTNBW1": "1",
+					"CNTNBW2": "1",
+					"CHGPWDT1": "1101022",
+					"CHGPWDT2": "1101024",
+					"CHGPWTM1": "220110",
+					"CHGPWTM2": "220111",
+					"UIDCNT": "1",
+					"APLBRH  ": "台北行",
+					"PWDDAT": "1101115",
+					"PWDTIM": "040111",
+                                       "TYPE": "bit1",
+					"LOGINDT": "1101117",
+					"LOGINTM": "060111",
+					"UIDSTC ": "1",
+					"STSCOD1": "A",
+					"STSCOD2": "B",
+					"CHGDATE": "1101117",
+					"SECCOD ": "BIT 2 ",
+					"TRAACN": "123123321321",
+                                        "TSFCNT ":"1",
+                                        "TXLMCCY":"ROC",
+                                        "TXLM":"11000"
+                       }
+		}			
+        }
+    }
+}', N'', N'', N'CQ18-香港地區主檔', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'c7bfb856-5000-c601-070a-1841c409d2b0', N'CQ21', 56, N'{
+    "name": "CQ21",
+    "from": "csr",
+    "sessionId": "EAutoForm.sessionId",
+    "agentId": "EAutoForm.agentId",
+    "formData": {
+        "CUSIDN": "CQ21",
+        "YYYMM": "11110"
+        
+    }
+}', N'{
+    "result": {
+        "source": {
+            "result": {
+                "form": {
+                    "rec": [{
+                        "DATTRN": "12",
+                        "TIMTRN": "1110202",
+                        "ACN": "1234567890123465",
+                        "TRXCOD": "1234",
+                        "ERRCOD": "0000",
+                        "STAN": "STAN NUM ",
+                        "TSFAMT": "12",
+                        "PRCNT": "4",
+                        "PRDATA(1)": "12",
+                        "PRDATA(2)": "123",
+                        "PRDATA(3)": "124",
+                        "PRDATA(4)": "125"
+                    }, {
+                         "DATTRN": "12",
+                        "TIMTRN": "1110202",
+                        "ACN": "1234567890123465",
+                        "TRXCOD": "1234",
+                        "ERRCOD": "0000",
+                        "STAN": "STAN NUM ",
+                        "TSFAMT": "12",
+                        "PRCNT": "4",
+                        "PRDATA(1)": "12",
+                        "PRDATA(2)": "1233",
+                        "PRDATA(3)": "1244",
+                        "PRDATA(4)": "1255"
+                    }]
+                }
+            }
+        }
+    }
+}', N'', N'', N'CQ21-電子自動化資料檔', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'0800c056-5000-dd60-880b-1842c2ec2490', N'CQ16', 57, N'{
+		        "name"      : "CQ16tbbapi",
+		        "from"      : "CSR",
+		        "sessionId" : BankTelForm.sessionId,
+		        "agentId"   : BankTelForm.agentId,
+		        "formData"  : {
+				"TXID"   : "CQ16",
+		        "TSFACN" : "1234",
+		},
+}', N'{
+    "result": {
+        "source": {
+            "result": {
+                "form": {
+                    "rec": [{
+                        "DATTSF":"12",
+"SEQ":"12",
+"TRNSRC":"12",
+"TRNCOD":"12",
+"OUTCRY":"12",
+"OUTBNK":"12",
+"INTSCRY":"12",
+"INTSBNK":"12",
+"INTSACN":"12",
+"AMOUNT":"12",
+"TRNDTA":"12",
+"INLEN":"12",
+"PRVDAT":"12",
+"WRSQYN":"12",
+"DLTYN":"12",
+"DATDLT":"12",
+"FEEFLG":"12",
+"TELNUM":"12",
+                    }, {
+                         "DATTRN": "12",
+                        "TIMTRN": "1110202",
+                        "ACN": "1234567890123465",
+                        "TRXCOD": "1234",
+                        "ERRCOD": "0000",
+                        "STAN": "STAN NUM ",
+                        "TSFAMT": "12",
+                        "PRCNT": "4",
+                        "PRDATA(1)": "12",
+                        "PRDATA(2)": "1233",
+                        "PRDATA(3)": "1244",
+                        "PRDATA(4)": "1255"
+                    }]
+                }
+            }
+        }
+    }
+}', N'', N'', N'電話銀行預約轉帳明細檔', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'22930983-f8d8-a069-9905-1842c36ac4b0', N'CQ19', 58, N'{
+ "name" : "CQ19",
+ "from" : "csr",
+ "sessionId" : "GlobalNetworkForm.sessionId",
+"agentId": "GlobalNetworkForm.agentId",
+ "formData" : {"HKID":"37563088",
+                      "TXID": "CQ19"
+          }
+}
+', N'{"form":{"REC":[{"AMTXML":"542332","TLRNUM":"013","DATAPL":"1101031","AMTLMT":"12345","TXLMT":"","BANKCOD":"012","SSLAMT":"432343","TSFACN":"1009283748564839","TXLMTCY":"USD","STSCOD":"","OTPAMT":"432355","NAME":"張簡檢查","DATDLT":"1101101","ACNOTYPE":"BIT2","CCY":"","LSTRDT":"1101102","SPVNUM":"01","ACNHKID":"1029384756","AMTCOD":"是"},{"AMTXML":"542332","TLRNUM":"013","DATAPL":"1101031","AMTLMT":"12345","TXLMT":"","BANKCOD":"012","SSLAMT":"432343","TSFACN":"1009283748564839","TXLMTCY":"USD","STSCOD":"","OTPAMT":"432355","NAME":"張簡檢查","DATDLT":"1101101","ACNOTYPE":"BIT2","CCY":"","LSTRDT":"1101102","SPVNUM":"01","ACNHKID":"1029384756","AMTCOD":"是"}],"ABEND":"OKLR"},"source":"<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\n    xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n    xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\n    <soap:Body>\n        <SubmitXmlResponse xmlns=\"http://www.cedar.com.tw/bluestar/\">\n            <SubmitXmlResult>0</SubmitXmlResult>\n            <response>\n                <BlueStar MsgName=\"CQ19\" RqUid=\"d3e2c399-b82b-4146-983e-6088dd60861d\"\n                    xmlns=\"http://www.cedar.com.tw/bluestar/\" Status=\"0\">\n                    <INPLEN>600</INPLEN>\n\t\t\t\t\t<INPZZZ>0</INPZZZ>\n\t\t\t\t\t<TXID>CQ19</TXID>\n\t\t\t\t\t<ABEND>OKLR</ABEND>\n\t\t\t\t\t<USERDATA>1234567890</USERDATA>\n  <REC>\n\t\t\t\t\t<BANKCOD>012</BANKCOD>\n\t\t\t\t\t<TSFACN>1009283748564839</TSFACN>\n\t\t\t\t\t<ACNOTYPE>BIT2</ACNOTYPE>\n\t\t\t\t\t<STSCOD></STSCOD>\n\t\t\t\t\t<DATAPL>1101031</DATAPL>\n\t\t\t\t\t<DATDLT>1101101</DATDLT>\n\t\t\t\t\t<AMTCOD>是</AMTCOD>\n\t\t\t\t\t<CCY></CCY>\n\t\t\t\t\t<TXLMTCY>USD</TXLMTCY>\n\t\t\t\t\t<TXLMT></TXLMT>\n\t\t\t\t\t<NAME>張簡檢查</NAME>\n\t\t\t\t\t<LSTRDT>1101102</LSTRDT>\n\t\t\t\t\t<AMTLMT>12345</AMTLMT>\n\t\t\t\t\t<AMTXML>542332</AMTXML>\n\t\t\t\t\t<SSLAMT>432343</SSLAMT>\n\t\t\t\t\t<OTPAMT>432355</OTPAMT>\n\t\t\t\t\t<SPVNUM>01</SPVNUM>\n\t\t\t\t\t<TLRNUM>013</TLRNUM>\n\t\t\t\t\t<ACNHKID>1029384756</ACNHKID>\n  </REC>\n<REC>\n\t\t\t\t\t<BANKCOD>012</BANKCOD>\n\t\t\t\t\t<TSFACN>1009283748564839</TSFACN>\n\t\t\t\t\t<ACNOTYPE>BIT2</ACNOTYPE>\n\t\t\t\t\t<STSCOD></STSCOD>\n\t\t\t\t\t<DATAPL>1101031</DATAPL>\n\t\t\t\t\t<DATDLT>1101101</DATDLT>\n\t\t\t\t\t<AMTCOD>是</AMTCOD>\n\t\t\t\t\t<CCY></CCY>\n\t\t\t\t\t<TXLMTCY>USD</TXLMTCY>\n\t\t\t\t\t<TXLMT></TXLMT>\n\t\t\t\t\t<NAME>張簡檢查</NAME>\n\t\t\t\t\t<LSTRDT>1101102</LSTRDT>\n\t\t\t\t\t<AMTLMT>12345</AMTLMT>\n\t\t\t\t\t<AMTXML>542332</AMTXML>\n\t\t\t\t\t<SSLAMT>432343</SSLAMT>\n\t\t\t\t\t<OTPAMT>432355</OTPAMT>\n\t\t\t\t\t<SPVNUM>01</SPVNUM>\n\t\t\t\t\t<TLRNUM>013</TLRNUM>\n\t\t\t\t\t<ACNHKID>1029384756</ACNHKID>\n  </REC>\n\t\t\t\t\t\n                </BlueStar>\n            </response>\n        </SubmitXmlResponse>\n    </soap:Body>\n</soap:Envelope>","isSuccess":true}', N'{"source":{"STSCOD":{"source":{"REC":[{"BANKCOD":"012","TSFACN":"1009283748564839","ACNOTYPE":"BIT2","STSCOD":" ","DATAPL":"1101031" ,"DATDLT":"1101101" ,"AMTCOD":"是","CCY":"","TXLMTCY":"USD","TXLMT":"1101111","NAME":"張簡檢查","LSTRDT":"1101102","AMTLMT":"12345","AMTXML":"542332","SSLAMT":"432343","OTPAMT":"432355","SPVNUM":"01","TLRNUM":"013","ACNHKID":"1029384756"}],"ABEND":"OKLR","USERDATA":" "},"isSuccess":true}},"isSuccess":true}', N'', N'香港地區轉帳帳號資料檔', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'c7bfb856-5000-9f58-c70d-1842d0350ef0', N'A013', 59, N'{
+   "name":"A013",
+   "from":"csr",
+   "sessionId":"000-000-000",
+   "agentId":"00000000",
+   "formData":{"TXACN":"00162058886","USERID":""}
+}', N'{
+    "result": {
+        "source": {
+        "OACN": "00162058886",
+        "ABEND": "ENRD"
+        }
+    }
+}', N'', N'', N'A013-暫停轉帳簡訊發送', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'0800c056-5000-1f10-aa07-1842d1fa5b50', N'CQ17', 60, N'{
+	"name" : "CQ17",
+	"from" : "csr",
+	"sessionId" : "xxx",
+	"formData" : {"VID":"12345"}
+}', N'', N'', N'', N'CQ17-全球金融網客戶關連檔主檔', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'0800c056-5000-8761-8503-18431e710480', N'A022', 61, N'<?xml version="1.0" encoding="utf-8" ?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <soap:Body>
+        <SubmitXml xmlns="http://www.cedar.com.tw/bluestar/">
+            <BlueStar MsgName="A022">
+                <TRXCOD>TNC0MBBT</TRXCOD>
+                <FILL01> </FILL01>
+                <TXID>A022</TXID>
+                <ABEND></ABEND>
+                <TXACN>00162058886</TXACN>
+            </BlueStar>
+        </SubmitXml>
+    </soap:Body>
+</soap:Envelope>
+
+', N'', N'', N'', N'A022-悠遊 DEBIT 卡外顯卡號檔', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'c7bfb856-5000-d55e-310b-18450e572670', N'N852', 62, N'{
+    "name": "N852",
+    "from": "csr",
+    "sessionId": "TaiwanPayForm.sessionId",
+    "agentId": "TaiwanPayForm.agentId",
+    "formData": {
+        "BANKID": "CQ21",
+        "DATE": "1111212",
+        "TIME": "1111212",
+
+    }
+}', N'{
+    "result": {
+        "source": {
+            "result": {
+                "form": {
+"INPLEN":"13",
+"INPZZZ":"0",
+"OFFSET":"",
+"HEADER":"N852",
+"BALANCE ":"33",
+"BALANCE1":"33",
+"BALANCE2":"33",
+"POINTAMT":"33",
+"MEMSTATE":"01",
+"REDSTATE":"Y",
+"ADDLIMON":"12",
+"ADDTSMON":"12",
+"TARTYPE":"1",
+"TARDATE":"1111212",
+"RESULT":"00"
+
+                }
+            }
+        }
+    }
+}', N'', N'', N'N852-查詢點數相關資料', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'c7bfb856-5000-d55e-310b-18455ef601c0', N'N854', 63, N'{
+    "name": "N854",
+    "from": "csr",
+    "sessionId": "TaiwanPayForm.sessionId",
+    "agentId": "TaiwanPayForm.agentId",
+    "formData": {
+        "BANKID": "CQ21",
+        "DATE": "1111212",
+        "TIME": "1111212",
+
+    }
+}', N'{
+    "result": {
+        "source": {
+            "result": {
+                "form": {
+
+
+                }
+            }
+        }
+    }
+}', N'', N'', N'N854-查詢紅利明細', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'b182e94a-93a8-0204-7501-18479b888f20', N'A019', 64, N'{
+      "name" : "A019tbbapi",
+      "from" : "CSR",
+      "sessionId" : UPreDesignateACForm.sessionId,
+      "agentId" : UPreDesignateACForm.agentId,
+      "formData" : data
+}
+
+
+
+
+', N'', N'', N'', N'A019-ATM 約定轉帳帳號歷史記錄檔查詢', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'b182e94a-93a8-0204-7501-1847f2951930', N'A016', 65, N'{
+      "name" : "A016tbbapi",
+      "from" : "CSR",
+      "sessionId" : UPreDesignateACForm.sessionId,
+      "agentId" : UPreDesignateACForm.agentId,
+      "formData" : data
+}
+
+
+
+
+', N'', N'', N'', N'A016-悠遊 DEBIT 卡外顯卡號檔', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'c7bfb856-5000-197b-330b-184992b9fed0', N'R001', 66, N'{
+ "name" : "R001",
+ "from" : "csr",
+ "sessionId" : "000-000-000",
+"agentId": "00000000",
+ "formData" : {
+                      "CUSID":"A123456814",
+                      "CARDTYP": "01"
+            }
+}', N'', N'', N'', N'R001-持卡人卡片號碼檔查詢', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'c7bfb856-5000-197b-330b-184995248800', N'R003', 67, N'{
+ "name" : "R003",
+ "from" : "csr",
+ "sessionId" : "000-000-000",
+"agentId": "00000000",
+ "formData" : {
+                      "CARDNUM":""
+                   
+            }
+}', N'', N'', N'', N'R003-信用卡催收清理資料明細檔', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'c7bfb856-5000-197b-330b-184996f354b0', N'R004', 68, N'{
+ "name" : "R004",
+ "from" : "csr",
+ "sessionId" : "000-000-000",
+"agentId": "00000000",
+ "formData" : {
+                      "CUSIDN":""
+                     
+            }
+}', N'', N'', N'', N'R004-信用卡持卡人卡片號碼檔查詢', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'c7bfb856-5000-197b-330b-1849d7e34870', N'R002', 69, N'{
+ "name" : "R002",
+ "from" : "csr",
+ "sessionId" : "000-000-000",
+"agentId": "00000000",
+ "formData" : {
+                      "CARDNUM":""
+                     
+            }
+}', N'', N'', N'', N'R002信用卡繳款性檔查詢', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'c7bfb856-5000-197b-330b-184a27555710', N'A002', 70, N'{
+   "name":"A002",
+   "from":"csr",
+   "sessionId":"000-000-000",
+   "agentId":"00000000",
+   "formData":{
+      "TXACN": "1234123412341234"
+   }
+}', N'', N'', N'', N'A002-COMBO卡號與帳號對應檔查詢', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'c7bfb856-5000-197b-330b-184a278522f0', N'A003', 71, N'{
+   "name":"A003",
+   "from":"csr",
+   "sessionId":"000-000-000",
+   "agentId":"00000000",
+   "formData":{
+      "TXSAH": "1234123412341234"
+   }
+}', N'', N'', N'', N'A003-COMBO卡號與帳號對應檔查詢', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'c7bfb856-5000-197b-330b-184a27be3020', N'S422', 72, N'{
+   "name":"S422",
+   "from":"csr",
+   "sessionId":"000-000-000",
+   "agentId":"00000000",
+   "formData":{
+      "ACN": "",
+"CUSIDN":"",
+"TYPE":""
+   }
+}', N'', N'', N'', N'S422-已解約存單主檔', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'c7bfb856-5000-197b-330b-184a27e291b0', N'R005', 73, N'{
+   "name":"R005",
+   "from":"csr",
+   "sessionId":"000-000-000",
+   "agentId":"00000000",
+   "formData":{
+      "CUSIDN": ""
+   }
+}', N'', N'', N'', N'R005-信用卡持卡人卡片號碼明細檔查詢查詢', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'c7bfb856-5000-197b-330b-184a28005600', N'R010', 74, N'{
+   "name":"R010",
+   "from":"csr",
+   "sessionId":"000-000-000",
+   "agentId":"00000000",
+   "formData":{
+      "CARDNUM": "1234123412341234"
+   }
+}', N'', N'', N'', N'R010-信用卡聯信中心分期交易資料檔查詢', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'c7bfb856-5000-197b-330b-184a2810f6e0', N'R011', 75, N'{
+   "name":"R011",
+   "from":"csr",
+   "sessionId":"000-000-000",
+   "agentId":"00000000",
+   "formData":{
+      "CARDNUM": "1234123412341234"
+   }
+}', N'', N'', N'', N'R011-信用卡來電分期交易資料檔查詢', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'c7bfb856-5000-197b-330b-184a281d5960', N'R012', 76, N'{
+   "name":"R012",
+   "from":"csr",
+   "sessionId":"000-000-000",
+   "agentId":"00000000",
+   "formData":{
+      "CUSIDN": ""
+   }
+}', N'', N'', N'', N'R012-信用卡來電分期申請資料檔查詢', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'c7bfb856-5000-197b-330b-184a283c0100', N'R024', 77, N'{
+   "name":"R024",
+   "from":"csr",
+   "sessionId":"000-000-000",
+   "agentId":"00000000",
+   "formData":{
+      "ETNMBR": "1234123412341234"
+   }
+}', N'', N'', N'', N'R024-電子票證資料檔查詢', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'c7bfb856-5000-197b-330b-184a284dca10', N'R025', 78, N'{
+   "name":"R025",
+   "from":"csr",
+   "sessionId":"000-000-000",
+   "agentId":"00000000",
+   "formData":{
+      "ETNMBR": "1234123412341234"
+   }
+}', N'', N'', N'', N'R025-電子票證交易歷史檔查詢', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'c7bfb856-5000-197b-330b-184a7d9d9360', N'CQ22', 79, N'{
+ "name" : "CQ22",
+ "from" : "csr",
+ "sessionId" : "PayOnlineForm.sessionId",
+"agentId": "PayOnlineForm.agentId",
+ "formData" : {
+                      "CUSIDN":"A123456814"
+                      
+            }
+}', N'', N'', N'', N'CQ22-電子支付系統主檔', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'c7bfb856-5000-197b-330b-184a86209bd0', N'CQ23', 80, N'{
+ "name" : "CQ23",
+ "from" : "csr",
+ "sessionId" : "PayOnlineForm.sessionId",
+"agentId": "PayOnlineForm.agentId",
+ "formData" : {
+                      "CUSIDN":"A123456814"
+                      
+            }
+}', N'', N'', N'', N'CQ23-電子支付綁定帳號檔', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'c7bfb856-5000-197b-330b-184a862a4170', N'CQ24', 81, N'{
+ "name" : "CQ24",
+ "from" : "csr",
+ "sessionId" : "PayOnlineForm.sessionId",
+"agentId": "PayOnlineForm.agentId",
+ "formData" : {
+                      "CUSIDN":"A123456814"
+                      
+            }
+}', N'', N'', N'', N'CQ24-訂單編號檔號', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'c7bfb856-5000-197b-330b-184a8c3bae00', N'R009', 82, N'{
+ "name" : "R009",
+ "from" : "csr",
+ "sessionId" : "CIPDFileForm.sessionId",
+"agentId": "CIPDFileForm.agentId",
+ "formData" : {
+                      "CARDNUM":""
+                     
+            }
+}', N'', N'', N'', N'R009-信用卡分期付款基本資料明細檔', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'bcb4be06-6777-4b3a-8c8a-d167232da929', N'CQ03', 9, N'{
+   "name" : "CQ03tbbapi",
+   "from" : "csr",
+   "sessionId" : UVoiceBankForm.sessionId,
+   "agentId" : UVoiceBankForm.agentId,
+   "formData" : {
+	"ACN" : "12331111121"
+   }
+}', N'', N'', N'', N'CQ03-電話銀行語音轉帳資料檔', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+GO
+--/電文---------------------------------------------------------------------
