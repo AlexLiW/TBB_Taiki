@@ -8,14 +8,15 @@
 * 
 * output parameters: N/A
 * 
-* LastUpdateUser: gemfor\emma.lu
-* LastUpdateDate: 2022/03/15
+* LastUpdateUser: ai3\Jason
+* LastUpdateDate: 2022/11/21
 * Note: 新增欄位(開戶日期、結清日期、總退票(三年)、總退票註記(三年))
 			2021/10/12 AI\Wolf.wu 針對將銀行客戶基本資料內的是否申請電話銀行移動到銀行客戶帳戶明細內，調整塞入的欄位並新增使用帳號查詢S601取得是否申請電話銀行
 			2022/01/11 AI\Wolf.wu 調整電文回覆錯誤代碼時顯示提示視窗，調整客戶帳戶明細檔之透支餘額未正確抓取的問題、金額套入格式處理
 			2022/02/21 gemfor\Liz.chen 是否申請網銀欄位改使用下拉選單
 			2022/3/7 gemfor\emma.lu doPostS110:修改帳號取值迴圈的長度,將所有帳號帶回來
-			2022/3/15gemfor\emma.lu doPostS110:帳號順序
+			2022/3/15 gemfor\emma.lu doPostS110:帳號順序
+			2022/11/21 ai3\Jason 新增doPostR004
 **************************************************************************/
 var ContactFormBTN = {
     sessionId : null,
@@ -43,6 +44,7 @@ var ContactFormBTN = {
             ContactFormBTN.doPostBSIC();
             ContactFormBTN.doPostS601();
             ContactFormBTN.doPostS110();
+			ContactFormBTN.doPostR004();
         }
        
 		
@@ -64,20 +66,37 @@ var ContactFormBTN = {
 		form.getControl("U_UCreditcardholderBTN").onclick = function() { // 信用卡持卡總覽
             ContactFormBTN.openTBBForm("TBB.UCreditcardholder.Form");
         };
+		form.getControl("U_PayOnline").onclick = function() { // 20221027小方新增 電子支付
+            ContactFormBTN.openTBBForm("CUS.PayOnline.Form");
+        };
         form.getControl("U_ACNO").onchange = ContactFormBTN.doPostS603; // 查詢客戶帳戶明細 下拉onchange S110
         
 	},
-	
-	openTBBForm : function(pageCode) { // 開啟對應表單
+	openTBBForm : function(pageCode) { // 開啟對應表單，20221027小方更改 開啟表單方式改為TAB
+		if (pageCode == "TBB.UAccountList.Form") {
+			pageName = "存款帳戶總覽按鈕";
+		} else if (pageCode == "TBB.EBankingInfo.Form") {
+			pageName = "網銀主檔";
+		}else if (pageCode == "TBB.XMLdoc.Form") {
+			pageName = "XML憑證資料檔";
+		}else if (pageCode == "TBB.UNetBankDepACNO.Form") {
+			pageName = "網路銀行轉入帳號資料檔";
+		}else if (pageCode == "TBB.UCreditcardholder.Form") {
+			pageName = "信用卡持卡總覽";
+		}else if (pageCode == "CUS.PayOnline.Form") {
+			pageName = "電子支付";
+		}
+		
 		var args = {
 			custID : form.getFieldValue("U_CustID"), // 身分證字號
 		};
-		var options = {
-				width: 1685,
-                height: 740
-		};
-		Utility.openDialog(pageCode + ".page", args, options);
+		
+		Utility.openTab(pageCode + ".page", args,pageName);
 	},
+	
+	
+	
+	
 	
 	// 查詢客戶基本資料BSIC hsin
     doPostBSIC : function() {
@@ -474,6 +493,50 @@ var ContactFormBTN = {
         })
 
     },
+	
+	
+	doPostR004:function (){
+			console.log("進入R004");
+		if (!form.validate()) {
+			return;
+		}
+		
+		ContactFormBTN.sessionId = Jui.random.nextUuid();//隨機給sessionId 
+		var userId = CommonBusiness.getCurrentUser().userId;
+		ContactFormBTN.agentId = CommonBusiness.getFieldValue("Qs.User", userId, "FLoginName");
+		var data = {
+	        "TXID": "R004",
+			"CUSIDN"	: form.getFieldValue("U_CustID")
+		};
+		var args = JSON.stringify({
+			"name" : "R004tbbapi",
+			"from" : "CSR",
+			"sessionId" : ContactFormBTN.sessionId,
+            "agentId" : ContactFormBTN.agentId,
+			"formData" : data,	
+		});
+		console.log(args);
+		TBBUtil.doPost(JSON.parse(args), function(ret) {
+            console.log(ret);
+			if (ret == undefined) {
+                Jui.message.alert("R004發送電文失敗，詳情請洽資訊處！");
+                return;
+			}
+			 if (ret.isSuccess) {
+				 if (ret.isSuccess == true) {
+					console.log("電文資料OK");
+					var formData = ret.form;
+					form.setFieldValue("U_TransferCenter", formData.TRANSCENTER);	//移轉中心別
+					form.setFieldValue("U_TransferDate", formData.TRANSDATE);	//移轉日期
+								
+				}else {
+					Jui.message.alert("發送電文失敗，詳情請洽資訊處！");
+					return;
+				}
+			 }
+ 
+			});
+		},
 	 doAmount:function (num){
 	        var str = parseInt(num).toString();
 	        if(str){

@@ -1,14 +1,15 @@
 /********************************************************************************
 	 信用卡卡片狀態查詢
 	 * Author: 			gemfor\Lillian
-	 * CreateDate: 		2021.06.24
+	 * CreateDate: 		2022.11.21
 	 * LastUpdateUser: gemfor\emma.lu
-	 * LastUpdateDate: 2022/03/30
+	 * LastUpdateDate: 2022.11.21
 	 * Note: 欄位排版
 					 2021/10/04 調整轉帳銀行欄位透過條件判斷要呈現的字典內容
 					 2022/01/07 針對新增欄位加入電文回傳、增加電文失敗時塞入欄位判斷、增加電文等待效果
 					 2022/03/07 doBSIH:修改帶值的欄位名稱
 					 2022.03.30-gemfor/Emma-稽核員代號
+					 2022.11.21 ai3/Jason新增發查R001、R003電文
 *********************************************************************************/
 var UCardinformationForm = {
 		doLoad : function(){
@@ -56,6 +57,7 @@ var UCardinformationForm = {
 		doChange : function(){
 			form.getControl("U_Inquiry").onclick = function() {
 				UCardinformationForm.doBSIH();
+				
 			};
 		},
 		
@@ -411,6 +413,8 @@ var UCardinformationForm = {
 					//U_O_Data3.push(data4);
 					U_O_Data4.push(data4); //Emma -修正帶入的值-20220307
 					form.getControl("U_Rating1924").setValue(U_O_Data4);
+					UCardinformationForm.doR001();//20221121 ai3 Jason.Fang
+					UCardinformationForm.doR003();//20221121 ai3 Jason.Fang
 					bar.close();
 				} else {
 						Jui.message.alert("發送電文失敗，詳情請洽資訊處！");
@@ -420,6 +424,102 @@ var UCardinformationForm = {
 				}, 1 * 1000);
 			});
 		},
+		
+		doR001:function (){
+			console.log("進入R001");
+		if (!form.validate()) {
+			return;
+		}
+		var cusid = form.getFieldValue("U_UID");//客戶ID
+		var cardtyp = form.getFieldValue("U_OCardType");
+		UCardinformationForm.sessionId = Jui.random.nextUuid();//隨機給sessionId 
+		var userId = CommonBusiness.getCurrentUser().userId;
+		UCardinformationForm.agentId = CommonBusiness.getFieldValue("Qs.User", userId, "FLoginName");
+		var codeDic = Utility.syncInvoke("Qs.Dictionary.getComboBoxItemsJson", {dictionaryId : "c7bfb856-5000-197b-330b-1849cfb05ab0"}).data; // TBB-對應卡別
+		var cardtxt = form.getFieldValue("U_OCardType");
+		for (var i = 0; i < codeDic.length; i++) {
+			if (codeDic[i].value == cardtxt) {
+				cardtxt = codeDic[i].text;
+				break;
+			}
+		}
+		var data = {
+	        "TXID": "R001",
+			"CUSID" : cusid, // 身分證
+			"CARDTYP" : cardtxt,//卡別
+		};
+		var args = JSON.stringify({
+			"name" : "R001tbbapi",
+			"from" : "CSR",
+			"sessionId" : UCardinformationForm.sessionId,
+			"agentId" 	: UCardinformationForm.agentId,
+			"formData" : data,	
+		});
+		console.log(args);
+		TBBUtil.doPost(JSON.parse(args), function(ret) {
+            console.log(ret);
+			if (ret == undefined) {
+                Jui.message.alert("R001發送電文失敗，詳情請洽資訊處！");
+                return;
+			}
+			 if (ret.isSuccess) {
+				 if (ret.isSuccess == true) {
+					console.log("電文資料OK");
+					var formData = ret.form;
+					form.setFieldValue("U_EmployeeCode", formData.EMPNO);	//招攬員工代號
+								
+				}else {
+					Jui.message.alert("發送電文失敗，詳情請洽資訊處！");
+					return;
+				}
+			 }
+ 
+			});
+		},
+		
+		doR003:function (){
+			console.log("進入R003");
+		if (!form.validate()) {
+			return;
+		}
+		
+		UCardinformationForm.sessionId = Jui.random.nextUuid();//隨機給sessionId 
+		var userId = CommonBusiness.getCurrentUser().userId;
+		UCardinformationForm.agentId = CommonBusiness.getFieldValue("Qs.User", userId, "FLoginName");
+		var data = {
+	        "TXID": "R003",
+			"CARDNUM"	: form.getFieldValue("U_CardNum")
+		};
+		var args = JSON.stringify({
+			"name" : "R003tbbapi",
+			"from" : "CSR",
+			"sessionId" : UCardinformationForm.sessionId,
+			"agentId" 	: UCardinformationForm.agentId,
+			"formData" : data,	
+		});
+		console.log(args);
+		TBBUtil.doPost(JSON.parse(args), function(ret) {
+            console.log(ret);
+			if (ret == undefined) {
+                Jui.message.alert("R003發送電文失敗，詳情請洽資訊處！");
+                return;
+			}
+			 if (ret.isSuccess) {
+				 if (ret.isSuccess == true) {
+					console.log("電文資料OK");
+					var formData = ret.form;
+					form.setFieldValue("U_OutsourcingNote", formData.ENT_FLAG);	//委外註記
+					form.setFieldValue("U_UnitCode", formData.ENT_ID);	//委外單位代號
+								
+				}else {
+					Jui.message.alert("發送電文失敗，詳情請洽資訊處！");
+					return;
+				}
+			 }
+ 
+			});
+		},
+		
 		//後兩位加上小數點+千分位
 		doAmount:function (num){
 			var str = parseInt(num).toString();
