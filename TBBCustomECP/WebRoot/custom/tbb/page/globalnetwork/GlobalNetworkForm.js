@@ -7,7 +7,9 @@
  * 
  * output parameters: N/A
  * 
- * LastUpdateUser: Gemfor.Emily; LastUpdateDate: 2022/10/25 Note:
+ * LastUpdateUser: Gemfor.Emily; LastUpdateDate: 2022/10/25 
+ *				   Gemfor.浩評;  LastUpdateDate: 2022/10/25
+ * Note: CQ17、CQ18、CQ19
  ******************************************************************************/
 var GlobalNetworkForm = {
 	// sessionId : null,
@@ -28,6 +30,8 @@ var GlobalNetworkForm = {
 		};
 		
 		GlobalNetworkForm.doOnchange2();
+		
+		form.getControl("U_button3").onclick = GlobalNetworkForm.doCQ17;
 	},
 
 	// 【查詢】顯示彈跳訊息確認
@@ -257,5 +261,50 @@ var GlobalNetworkForm = {
 				form.setFieldValue("U_HKID2", null);
 			}
 		}
+	},
+	
+	doCQ17 : function() {
+		//form.getControl("U_Grid3").setValue();
+		form.setFieldValue("U_HKID3", "");
+		var ccid = form.getFieldValue("U_CCID");
+		
+		if(!ccid){
+			Jui.message.hint("請輸入\"客戶自選ID\"");
+			return;
+		}else if (!(ccid.length == 10 || ccid.length == 9) || ccid.substr(0,3)!="TBB"){
+			Jui.message.hint("請輸入正確的\"客戶自選ID\"")
+			return;
+		}
+		data = {
+				"TXID" : "CQ17",
+		        "VID"  : "1234",
+		};
+		var args = JSON.stringify({
+		        "name"      : "CQ17tbbapi",
+		        "from"      : "CSR",
+		        "sessionId" : "XXX",
+		        "formData"  : data,
+		});
+		var bar = Jui.message.progress(function() {
+	    	Jui.message.hint("查詢資料中，請稍後...");
+        });
+		console.log(args);
+		TBBUtil.doPost(JSON.parse(args), function(ret) {
+			console.log(ret);
+			if (ret == undefined) {
+				Jui.message.alert("發送電文失敗，詳情請洽資訊處！");
+				bar.close();
+				return;
+			}
+			if (ret.isSuccess) {
+				form.setFieldValue("U_HKID3", ret.form.HKID);
+				bar.close();
+			} else {
+				// 電文失敗
+				Jui.message.alert("發送電文失敗，詳情請洽資訊處！");
+				bar.close();
+				return;
+			}
+		});
 	},
 };

@@ -55,6 +55,8 @@ var UDebitLossForm = {
         }
         UDebitLossForm.doStatus(); // 判斷狀態 20220210 Tiffany
         form.getControl("U_LossKind_New").onchange = UDebitLossForm.doChange; // 金融卡狀態 20220210 Tiffany
+		
+		form.getControl("U_loss_report").onclick = UDebitLossForm.doA014;
     },
 
     // 連動欄位 hsin
@@ -982,6 +984,72 @@ var UDebitLossForm = {
             	form.setFieldDisabled("U_LossKind_New", true);
             }
     	}
+    },
+	
+	//A014掛失／取消掛失悠遊DEBIT卡悠遊功能 20221028 浩評
+    doA014: function() {
+    	form.setFieldValue("U_Result_6", "");
+        form.setFieldValue("U_ResultExplain_6", "");
+        
+        if (!form.getFieldValue("U_SAMDKEY")) {
+            Jui.message.hint("無\"悠遊卡外顯卡號\"");
+            return;
+        } 
+        
+        if(!form.getFieldValue("U_SAMDKEY_Result")){
+        	var samdkey = form.getFieldValue("U_SAMDKEY");
+        	form.setFieldValue("U_SAMDKEY_Result", samdkey);
+        }
+        
+        var SAMDKEY_Result = form.getFieldValue("U_SAMDKEY_Result")
+        
+	    form.setFieldDisabled("U_SAMDKEY_Result", false);
+	    data = {
+	    	"TXID"   : "A014",
+	        "TXSAMD" : SAMDKEY_Result,// 悠遊卡外顯卡號
+	        "TXSEL"  : "04",
+	    };
+	    var args = JSON.stringify({
+	        "name"      : "A014tbbapi",
+	        "from"      : "CSR",
+	        "sessionId" : UDebitLossForm.sessionId,
+	        "agentId"   : UDebitLossForm.agentId,
+	        "formData"  : data,
+	    });
+	    console.log(args);
+	    Jui.message.confirm('是否取消掛失:'+SAMDKEY_Result,function(result){
+		   	if(result == 'ok'){
+		   		var bar = Jui.message.progress(function() {
+			    	Jui.message.hint("查詢資料中，請稍後...");
+		        });
+		   		console.log(result);
+		   		TBBUtil.doPost(JSON.parse(args), function(ret) {
+		             console.log(ret);
+		             if (ret == undefined) {
+		            	 Jui.message.alert("發送電文失敗，詳情請洽資訊處！");
+		            	 bar.close();
+		            	 return;
+		             }
+		             if (ret.isSuccess) {
+		            	 var MSGCOD = ret.form.ABEND;
+		            	 form.setFieldValue("U_Result_6", ret.form.ABEND);
+		            	 msgcodDicRet = Utility.syncInvoke("Qs.Dictionary.getComboBoxItemsJson", {dictionaryId : "ec9b8729-0c00-a947-3c06-179e5676d840"}).data;
+		            	 for (var i = 0; i < msgcodDicRet.length; i++) {
+		            		 if (msgcodDicRet[i].value == MSGCOD) {
+		            			 form.setFieldValue("U_ResultExplain_6", msgcodDicRet[i].text);
+		            			 break;
+		            		 }
+		            	 }
+		            	 bar.close();
+		             } else {
+		            	 // 電文失敗
+		                 Jui.message.alert("發送電文失敗，詳情請洽資訊處！");
+		                 bar.close();
+		                 return;
+		             }
+		        })
+		   	}
+	    });
     },
     
 }
