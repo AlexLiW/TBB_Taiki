@@ -139,12 +139,12 @@ var EBankingInfoForm = {
 						form.setFieldValue("U_SNHKEY", TBBUtil.formatDTM(formData.SNHKEY)); // 申請行變更日期
 						form.setFieldValue("U_CUSCOD", formData.CUSCOD); // 客戶性質別
 						form.setFieldValue("U_TRAACN", formData.TRAACN); // 扣帳帳號
-						if(formData.CHGPWDT == "000000"){
-							form.setFieldValue("U_CHGPWDT", "交易密碼變更成功，簽入密碼變更失敗"); //上次密碼變更日期
-						}else if(formData.CHGPWDT == "999999"){
-							form.setFieldValue("U_CHGPWDT", "簽入密碼變更成功，交易密碼變更成功"); //上次密碼變更日期
+						if(formData.CHGPSS == "000000"){
+							form.setFieldValue("U_CHGPSS", "交易密碼變更成功，簽入密碼變更失敗"); //上次密碼變更日期
+						}else if(formData.CHGPSS == "999999"){
+							form.setFieldValue("U_CHGPSS", "簽入密碼變更成功，交易密碼變更成功"); //上次密碼變更日期
 						}else{
-							form.setFieldValue("U_CHGPWDT", TBBUtil.formatDTM(formData.CHGPWDT)); //上次密碼變更日期
+							form.setFieldValue("U_CHGPSS", TBBUtil.formatDTM(formData.CHGPSS)); //上次密碼變更日期
 						}
 						form.setFieldValue("U_DATAPL", TBBUtil.formatDTM(formData.DATAPL)); // 申請日期
 						form.setFieldValue("U_DATDLT", TBBUtil.formatDTM(formData.DATDLT)); // 註銷日期

@@ -212,7 +212,7 @@ var UAccountListForm = {
 								U_DPITYP 	: formData.REC[i].DPITYP,
 								U_ATRCOD 	: formData.REC[i].ATRCOD,
 								//U_IBHPWD : formData.REC[i].IBHPWD,
-								U_IBHPWD 	: (formData.REC[i].IBHPWD == "*" ? "是" : "否" ),	//2022.02.23-lillian-全行收付顯示中文化
+								U_IBHPSS 	: (formData.REC[i].IBHPSS == "*" ? "是" : "否" ),	//2022.02.23-lillian-全行收付顯示中文化
 								U_ADPIBAL 	: aDPIBAL,
 								U_CLR 		: Jui.string.isEmpty(formData.REC[i].CLR) ? "" : TBBUtil.thousandComma(parseInt(formData.REC[i].CLR.substr(0, 11))) + "." + formData.REC[i].CLR.substr(11, 2),
 								U_ITR 		: Jui.string.isEmpty(formData.REC[i].ITR) ? "" : parseInt(formData.REC[i].ITR.substr(0, 2)) + "." + formData.REC[i].ITR.substr(2, 3),

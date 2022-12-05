@@ -126,7 +126,7 @@ var GlobalNetworkForm = {
 									U_LASTDATE :  TBBUtil.formatDTM(formData.UPDDATE),
 									U_ADMUser : formData.USERID,
 									U_ADMPass : "",
-									U_ADMPassword : "",
+									U_ADMPss : "",
 									U_debit_account : formData.TRAACN,
 									U_Last_check : TBBUtil.formatDTM(formData.CHGPWDT1)+ formData.CHGPWTM1,
 									U_password_change : TBBUtil.formatDTM(formData.CHGPWDT2)+ formData.CHGPWTM2,
