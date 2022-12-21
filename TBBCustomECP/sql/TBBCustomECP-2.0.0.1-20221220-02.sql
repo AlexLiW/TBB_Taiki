@@ -73,4 +73,74 @@ INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_D
    }
 }', N'', N'', N'', N'信用卡額度檔查詢', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
 
+--R017
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'c7bfb856-5000-b864-bf02-18528289bcd0', N'R017', 90, N'{
+   "name":"R017",
+   "from":"csr",
+   "sessionId":"000-000-000",
+   "agentId":"00000000",
+   "formData":{
+      "CORPIDN": ""
+   }
+}', N'', N'', N'', N'信用卡特約商店資料主檔查詢', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+GO
+--R018
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'c7bfb856-5000-b864-bf02-185282bcc320', N'R018', 91, N'{
+   "name":"R018",
+   "from":"csr",
+   "sessionId":"000-000-000",
+   "agentId":"00000000",
+   "formData":{
+      "CORPIDN": ""
+   }
+}', N'', N'', N'', N'信用卡特約商店資料明細檔查詢', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+GO
+--R019
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'c7bfb856-5000-b864-bf02-185282dd74b0', N'R019', 92, N'{
+   "name":"R019",
+   "from":"csr",
+   "sessionId":"000-000-000",
+   "agentId":"00000000",
+   "formData":{
+      "CORPIDN": "",
+      "BRHNMBR":""
+   }
+}', N'', N'', N'', N'本行信用卡特店主檔資料(分店)明細檔查詢', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+GO
+--R020
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'c7bfb856-5000-b864-bf02-1852835c3130', N'R020', 95, N'{
+   "name":"R020",
+   "from":"csr",
+   "sessionId":"000-000-000",
+   "agentId":"00000000",
+   "formData":{
+      "CUSIDN": ""
+   }
+}', N'', N'', N'', N'高風險客戶資料檔查詢', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+GO
+--R026
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'c7bfb856-5000-b864-bf02-185282ef7b70', N'R026', 93, N'{
+   "name":"R026",
+   "from":"csr",
+   "sessionId":"000-000-000",
+   "agentId":"00000000",
+   "formData":{
+      "YEAR": "",
+      "CRDID":""
+   }
+}', N'', N'', N'', N'朝天宮點燈統計檔查詢', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+GO
+--R027
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'c7bfb856-5000-b864-bf02-185283888200', N'R027', 96, N'{
+   "name":"R027",
+   "from":"csr",
+   "sessionId":"000-000-000",
+   "agentId":"00000000",
+   "formData":{
+      "HCEKEY": "",
+      "KEYTYPE":""
+   }
+}', N'', N'', N'', N'HCE資料檔查詢', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+GO
+
 --/電文------------------------------------------------------------------------------------------------------

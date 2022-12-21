@@ -2,14 +2,16 @@
 	 信用卡卡片狀態查詢
 	 * Author: 			gemfor\Lillian
 	 * CreateDate: 		2022.11.21
-	 * LastUpdateUser: gemfor\emma.lu
-	 * LastUpdateDate: 2022.11.21
+	 * LastUpdateUser: 
+	 * LastUpdateDate: 2022.12.20
 	 * Note: 欄位排版
 					 2021/10/04 調整轉帳銀行欄位透過條件判斷要呈現的字典內容
 					 2022/01/07 針對新增欄位加入電文回傳、增加電文失敗時塞入欄位判斷、增加電文等待效果
 					 2022/03/07 doBSIH:修改帶值的欄位名稱
 					 2022.03.30-gemfor/Emma-稽核員代號
 					 2022.11.21 ai3/Jason新增發查R001、R003電文
+					 2022.12.14 新增額度異動按鈕連結
+					 2022.12.20 新增高風險按鈕連結
 *********************************************************************************/
 var UCardinformationForm = {
 		doLoad : function(){
@@ -55,10 +57,20 @@ var UCardinformationForm = {
 		
 		
 		doChange : function(){
-			form.getControl("U_Inquiry").onclick = function() {
+			form.getControl("U_Inquiry").onclick = function() {//查詢按鈕
 				UCardinformationForm.doBSIH();
 				
 			};
+			form.getControl("U_QChange").onclick = function() {//額度異動按鈕
+				
+				UCardinformationForm.doQChange(1);
+				
+			};	
+			form.getControl("U_HRCustomers").onclick = function() {//高風險按鈕
+			
+				UCardinformationForm.doQChange(2);
+				
+			};	
 		},
 		
 		setOnchange : function() {
@@ -71,6 +83,25 @@ var UCardinformationForm = {
 					}
 				}
 			}; 
+		},
+		
+		doQChange : function(id){//按下額度異動檔按鈕
+			
+			var args ={
+				custID:form.getFieldValue("U_UID"),//抓身分證欄位
+			};
+			var args2 ={
+				TID:form.getFieldValue("U_Cellphone"),//抓持卡人手機聯絡號碼
+				CID:form.getFieldValue("U_OCardNum")//抓卡號
+			};
+			
+			if(id==1){
+			Utility.openTab("CUS.OCFile.Form.page",args,"額度異動檔");
+			//開啟額度異動單元
+			}else if(id==2){
+				Utility.openTab("CUS.HighRisk.Form.page",args2,"高風險客戶資料檔");
+			//開啟高風險單元
+			}
 		},
 		
 		doBSIH : function(){
