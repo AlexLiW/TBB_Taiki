@@ -143,4 +143,28 @@ INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_D
 }', N'', N'', N'', N'HCE資料檔查詢', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
 GO
 
+--S005
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'c7bfb856-5000-b864-bf02-1852843259a0', N'S005', 97, N'{
+   "name":"S005",
+   "from":"csr",
+   "sessionId":"000-000-000",
+   "agentId":"00000000",
+   "formData":{
+      "CUSIDN": ""
+   }
+}', N'', N'', N'', N'客戶身份證偽造或遺失記錄檔查詢', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+GO
+
+--R032
+INSERT [dbo].[TpCUSmCsrTemplate] ([FId], [FName], [FIndex], [U_UpTemplate], [U_DownTemplate1], [U_DownTemplate2], [U_DownTemplate3], [FDescription], [U_ConnectionId], [U_DataModelUp], [U_DataModel], [FDataModel]) VALUES (N'c7bfb856-5000-b864-bf02-1852831ec540', N'R032', 94, N'{
+   "name":"R032",
+   "from":"csr",
+   "sessionId":"000-000-000",
+   "agentId":"00000000",
+   "formData":{
+      "CARDNUM": ""
+   }
+}', N'', N'', N'', N'依卡號查詢扣款帳號', N'ec9b8729-0c00-a162-6507-1798887712b0', N'Json', N'Json', NULL)
+GO
+
 --/電文------------------------------------------------------------------------------------------------------

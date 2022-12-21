@@ -9,7 +9,7 @@
 * output parameters: N/A
 * 
 * LastUpdateUser: ai3\Jason
-* LastUpdateDate: 2022/11/21
+* LastUpdateDate: 2022/12/21
 * Note: 新增欄位(開戶日期、結清日期、總退票(三年)、總退票註記(三年))
 			2021/10/12 AI\Wolf.wu 針對將銀行客戶基本資料內的是否申請電話銀行移動到銀行客戶帳戶明細內，調整塞入的欄位並新增使用帳號查詢S601取得是否申請電話銀行
 			2022/01/11 AI\Wolf.wu 調整電文回覆錯誤代碼時顯示提示視窗，調整客戶帳戶明細檔之透支餘額未正確抓取的問題、金額套入格式處理
@@ -17,6 +17,7 @@
 			2022/3/7 gemfor\emma.lu doPostS110:修改帳號取值迴圈的長度,將所有帳號帶回來
 			2022/3/15 gemfor\emma.lu doPostS110:帳號順序
 			2022/11/21 ai3\Jason 新增doPostR004
+			2022/12/20 ai3\Jason 新增客戶身分證偽造遺失檔表單
 **************************************************************************/
 var ContactFormBTN = {
     sessionId : null,
@@ -44,8 +45,11 @@ var ContactFormBTN = {
             ContactFormBTN.doPostBSIC();
             ContactFormBTN.doPostS601();
             ContactFormBTN.doPostS110();
-			ContactFormBTN.doPostR004();
+			
         }
+		form.getControl("U_selsct").onclick = function() { // 20221220小方新增 客戶身分證偽造遺失檔表單
+            ContactFormBTN.doS005();
+        };
        
 		
 	},
@@ -69,6 +73,7 @@ var ContactFormBTN = {
 		form.getControl("U_PayOnline").onclick = function() { // 20221027小方新增 電子支付
             ContactFormBTN.openTBBForm("CUS.PayOnline.Form");
         };
+		
         form.getControl("U_ACNO").onchange = ContactFormBTN.doPostS603; // 查詢客戶帳戶明細 下拉onchange S110
         
 	},
@@ -100,7 +105,9 @@ var ContactFormBTN = {
 	
 	// 查詢客戶基本資料BSIC hsin
     doPostBSIC : function() {
-		
+		var bar = Jui.message.progress(function() {		
+			   Jui.message.hint("查詢資料中，請稍後...");
+			});
 		var fpidInfo = form.getFieldValue("U_CustID"); 
 		var newfpid = "";
 		if(fpidInfo.length == 10){
@@ -135,6 +142,7 @@ var ContactFormBTN = {
 						setTimeout(function() {
 							BSIC_Not0000.close();
 						}, 1 * 2000);
+						bar.close();
 						return;
             }
             if(ret.isSuccess) {
@@ -165,6 +173,7 @@ var ContactFormBTN = {
 					form.setFieldValue("U_AcceptDM", formData.DM);
 					form.setFieldValue("U_Guarantor", formData.GUARANTOR);
 					form.setFieldValue("U_Accountcategory", formData.ACCTTYPE);
+					bar.close();
 				} else {
 						for (let i = 0; i < ABEND_Dic.length; i++) {
 							if (ABEND_Dic[i].value == ABEND) {
@@ -176,6 +185,7 @@ var ContactFormBTN = {
 								}, 1 * 2000);
 							}
 						}
+						bar.close();
 						return;
 				}
             } else {
@@ -185,6 +195,7 @@ var ContactFormBTN = {
 				setTimeout(function() {
 					BSIC_Not0000.close();
 				}, 1 * 2000);
+				bar.close();
                 return;
             }
         });
@@ -350,6 +361,7 @@ var ContactFormBTN = {
                   }
 
                     form.getControl("U_ACNO").loadItems(account);
+					ContactFormBTN.doPostR004();
                 }
             })
         }   
@@ -500,7 +512,9 @@ var ContactFormBTN = {
 		if (!form.validate()) {
 			return;
 		}
-		
+		 var bar = Jui.message.progress(function() {		//2022.12.20-新增電文發送等待畫面
+           Jui.message.hint("查詢資料中，請稍後...");
+        });
 		ContactFormBTN.sessionId = Jui.random.nextUuid();//隨機給sessionId 
 		var userId = CommonBusiness.getCurrentUser().userId;
 		ContactFormBTN.agentId = CommonBusiness.getFieldValue("Qs.User", userId, "FLoginName");
@@ -520,6 +534,7 @@ var ContactFormBTN = {
             console.log(ret);
 			if (ret == undefined) {
                 Jui.message.alert("R004發送電文失敗，詳情請洽資訊處！");
+				bar.close();
                 return;
 			}
 			 if (ret.isSuccess) {
@@ -528,14 +543,91 @@ var ContactFormBTN = {
 					var formData = ret.form;
 					form.setFieldValue("U_TransferCenter", formData.TRANSCENTER);	//移轉中心別
 					form.setFieldValue("U_TransferDate", formData.TRANSDATE);	//移轉日期
+					bar.close();
 								
 				}else {
 					Jui.message.alert("發送電文失敗，詳情請洽資訊處！");
+					bar.close();
 					return;
 				}
 			 }
  
 			});
+		},
+		
+		
+		doS005:function (){
+			 var bar = Jui.message.progress(function() {		
+			   Jui.message.hint("查詢資料中，請稍後...");
+			});
+			if (!form.validate()) {
+				bar.close();
+				return;
+			}	
+			ContactFormBTN.sessionId = Jui.random.nextUuid();//隨機給sessionId 
+			var userId = CommonBusiness.getCurrentUser().userId;
+			ContactFormBTN.agentId = CommonBusiness.getFieldValue("Qs.User", userId, "FLoginName");
+			var data = {
+				"TXID": "S005",
+				"CUSIDN"	: form.getFieldValue("U_CustID")
+			};
+			var args = JSON.stringify({
+				"name" : "S005tbbapi",
+				"from" : "CSR",
+				"sessionId" : ContactFormBTN.sessionId,
+				"agentId" : ContactFormBTN.agentId,
+				"formData" : data,	
+			});
+			console.log(args);
+			TBBUtil.doPost(JSON.parse(args), function(ret) {
+				console.log(ret);
+				if (ret == undefined) {
+					Jui.message.alert("S005發送電文失敗，詳情請洽資訊處！");
+					bar.close();
+					return;
+				}
+				 if (ret.isSuccess) {
+					 if (ret.isSuccess == true) {
+						console.log("電文資料OK");
+						var formData = ret.form;
+						form.setFieldValue("U_RN", formData.CODLOS);	//通報原因
+						var record ={
+							U_ID:form.getFieldValue("U_CustID"),
+							RESULT:formData.ABEND,
+							U_Issued:formData.DOCNUM ,
+							U_Notification:ContactFormBTN.doDate(formData.DATNUM)+"  "+ContactFormBTN.doTime(formData.DATTIME),
+							U_Occurrence:ContactFormBTN.doDate(formData.DATSTP),
+							U_Type:formData.DATMIND,
+							U_Flier:formData.USERID,
+							U_Warning:formData.MEMO,
+							U_Reissue:ContactFormBTN.doDate(formData.DATRSV),
+							U_Reason:formData.CODLOS,
+							U_Release:ContactFormBTN.doDateT(formData.DATCDT),
+							U_CenterDate:ContactFormBTN.doDateT(formData.EXECDT),
+							U_CName:formData.NAME,
+							U_Exchange:formData.FPMARK,
+							U_Accidents:formData.FPBRH,
+							U_F:formData.RMARK,
+							U_FBranch:formData.RBRH,
+							U_TBranch:formData.SBRH,  
+							U_FLogin:formData.RCNT ,
+							U_office:ContactFormBTN.doDate(formData.DATEVT )+"  "+ContactFormBTN.doTime(formData.DATTIM ) ,
+							U_WNotes:formData.MARK,
+							
+							
+							
+						}
+						Utility.openTab("CUS.CIDForged.Form.page",record,"客戶身分證偽造遺失檔");
+						bar.close();
+									
+					}else {
+						Jui.message.alert("發送電文失敗，詳情請洽資訊處！");
+						bar.close();
+						return;
+					}
+				 }
+	 
+				});
 		},
 	 doAmount:function (num){
 	        var str = parseInt(num).toString();
@@ -551,8 +643,34 @@ var ContactFormBTN = {
 	        }else{
 	            return str;
 	        }
-	    }
-	
+	    },
+		
+	doTime : function(time) {//時間格式重整hh:mm
+        var Time=
+		time.substr(0, 2) + ":" + time.substr(2, 2) ;
+		return Time;
+		
+    },
+	doDate : function(date) {//日期格式重整yyy/mm/dd OR yyyy/mm/dd
+        var Date=date;
+		var a;
+		if(Date.length==8){
+			a= (Date.substr(0,4)-1911)+(Date.substr(4,4));
+			if(a.length==6){
+				a=a.substr(0,2) + "/" + a.substr(2, 2) + "/" + a.substr(4, 2);
+			}else{
+				 a=a.substr(0,3) + "/" + a.substr(3, 2) + "/" + a.substr(5, 2);
+			}
+		}else{
+			a=Date.substr(0,3) + "/" + Date.substr(3, 2) + "/" + Date.substr(5, 2);
+		}
+		return a
+		
+    },
+	doDateT : function(datet) {//日期格式重整yyy/mm/dd hh:mm:ss:ms
+        var DateT=datet.substr(0, 3) + "/" + datet.substr(3, 2)+ "/" + datet.substr(5, 2)+ "\n"+ datet.substr(7, 2)+":"+datet.substr(9, 2)+":"+datet.substr(11, 2)+":"+datet.substr(13, 3);
+		return DateT
+    },
 	
 	
 	
